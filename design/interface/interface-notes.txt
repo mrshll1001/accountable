@@ -1,0 +1,34 @@
+Analysis of They Work For You - thoughts and notes.
+
+GENERAL:
+ - Search function via Postcode:
+  Is this translatable? What would you search by? Charity category, name, funding maybe?
+
+
+MP PAGES:
+  Prompts to ask people how they would use the information.
+    Potentially after they hit the download link instead of automatically like on TWFY. Give people a chance to actually read the data.
+
+  Selection of Votes
+    Project List section should cover this. Serves basically the same functionality.
+
+  Recent appearances
+    In the media? Funding Campaigns? Press Office?
+
+  RSS feeds
+    (projects? Funding?)
+
+  Expenses data (Spending spread? Admin vs Project based spending?)
+    These links take you to the Parliamentary Standards site, where you can look up the MPs and get the information in a .xls file (believe this is word)
+    In adaptation, want to provide an open-data API to request data - already got the download in standard formats, maybe use a live feed? How to implement?
+
+  Previous MPs in the constituency
+    Maybe show charities / organisations that do similar work? This could be too broad, e.g. 'rare diseases' work could be various charities focusing on specific diseases.
+    Previous projects by charities that have worked in this area?
+
+  Numerology
+    Quite good. At the moment my site design is mainly numbers, and an important note is that 'numbers do not imply quality'. Maybe a disclaimer on site saying that not all projects require intense funding?
+    They do compare (in plaintext) w/ other MPS. .e.g '28 debates, above average for MPs'. This could be quite interesting to see how charities would compare themselves to others.
+
+  Register of Interests.
+    Would be cool to codify projects ourselves, then automatically generate the interests of the charities; see how they react?
