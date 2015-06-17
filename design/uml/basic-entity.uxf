@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>110</y>
+      <w>150</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Organisation
+--
+id: int
+name: str
+description: str
+--
+funders: [list]
+projects: [list]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>130</y>
+      <w>150</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Individual
+--
+id: int
+name: str
+--
+connections: [list]
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>390</y>
+      <w>150</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Project
+--
+id: int
+name: str
+status: ENUM
+type: ENUM
+funding: int
+--
+funders: [list]
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
