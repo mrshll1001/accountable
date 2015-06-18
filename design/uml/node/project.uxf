@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>280</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>Project
+--
+id: int
+name: str
+status: ACTIVE | PENDING | INACTIVE |
+type: str
+span: int
+description: str
+totalfunding: int
+--
+--funders--
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

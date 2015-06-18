@@ -4,8 +4,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>110</y>
+      <x>90</x>
+      <y>120</y>
       <w>150</w>
       <h>190</h>
     </coordinates>
@@ -23,8 +23,8 @@ projects: [list]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>390</x>
-      <y>130</y>
+      <x>290</x>
+      <y>110</y>
       <w>150</w>
       <h>200</h>
     </coordinates>
@@ -33,7 +33,7 @@ projects: [list]
 id: int
 name: str
 --
-connections: [list]
+connections
 
 
 </panel_attributes>
@@ -42,8 +42,8 @@ connections: [list]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
-      <y>390</y>
+      <x>90</x>
+      <y>370</y>
       <w>150</w>
       <h>200</h>
     </coordinates>
