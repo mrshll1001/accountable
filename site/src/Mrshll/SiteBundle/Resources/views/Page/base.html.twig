@@ -1,0 +1,22 @@
+<html>
+  <head>
+    {% block head %}
+      <title>{% block title %}Default Title Page{% endblock title %}</title>
+
+      <!-- Importing Bootstrap -->
+      <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css" rel="stylesheet">
+
+    {% endblock head %}
+  </head>
+
+  {% block body %}
+  <body>
+
+
+    {% block content %}
+    
+    {% endblock content %}
+
+  </body>
+  {% endblock body %}
+</html>
