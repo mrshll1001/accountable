@@ -1,0 +1,4 @@
+services:
+#    mrshll_site.example:
+#        class: Mrshll\SiteBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

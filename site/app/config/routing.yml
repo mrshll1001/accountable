@@ -1,3 +1,7 @@
+mrshll_site:
+    resource: "@MrshllSiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
