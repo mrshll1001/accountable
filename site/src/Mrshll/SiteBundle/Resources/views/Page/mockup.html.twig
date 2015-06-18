@@ -72,8 +72,39 @@
         </div>
 
       </div>
+    </div>
+
+    <div class="row">
+      <h2>Projects</h2>
+
+      <div class="col-md-12">
+        <div class="panel panel-default">
+
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#allprojects" aria-controls="allprojects" role="tab" data-toggle="tab">All Projects</a></li>
+            <li role="presentation"><a href="#activeprojects" aria-controls="activeprojects" role="tab" data-toggle="tab">Active Projects</a></li>
+            <li role="presentation"><a href="#inactiveprojects" aria-controls="inactiveprojects" role="tab" data-toggle="tab">Inactive Projects</a></li>
+            <li role="presentation"><a href="#pendingprojects" aria-controls="pendingprojects" role="tab" data-toggle="tab">Pending Projects</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">Bacon</div>
+            <div role="tabpanel" class="tab-pane" id="profile">Pork<div>
+            <div role="tabpanel" class="tab-pane" id="messages">Gammon</div>
+            <div role="tabpanel" class="tab-pane" id="settings">Sausage</div>
+          </div>
+
+        </div>
+      </div>
 
     </div>
 
   </div>
+  <!-- End of container -->
+
+  <script>
+    var hello = $('.world');
+  </script>
+
 {% endblock content %}
