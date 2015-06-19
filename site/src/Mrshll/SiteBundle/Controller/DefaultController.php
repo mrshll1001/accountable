@@ -19,6 +19,8 @@ class DefaultController extends Controller
     */
     public function orgAction()
     {
+
+      $orgs = null;
       return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array());
     }
 
@@ -40,7 +42,7 @@ class DefaultController extends Controller
     public function overviewAction()
     {
 
-      $nodes = OrgModel::getAll();
+      $nodes = OrgModel::getAllAsGraph();
       return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array('nodes'=>$nodes));
     }
 

@@ -114,7 +114,25 @@ class OrgModel {
   // ====================================================
   // Static functions
   // ====================================================
+
   public static function getAll()
+  {
+    // Build the NeoClient
+    $client = ClientBuilder::create()->addConnection('default', 'http', 'localhost', 7474, true, 'neo4j', 'BigdekubabA666')->setAutoFormatResponse(true)->build();
+
+    // Query for all organisations
+    $q = "MATCH (n:PERSON) return n";
+    $result = $client->sendCypherQuery($q)->getResult();
+
+    $orgs = array();
+    foreach($result->getNodes() as $node)
+    {
+      $orgs[] = ['name'=>$node->getProperty('name'), 'id'=>$node->getId()];
+    }
+
+  }
+
+  public static function getAllAsGraph()
   {
     // Build the NeoClient
     $client = ClientBuilder::create()->addConnection('default', 'http', 'localhost', 7474, true, 'neo4j', 'BigdekubabA666')->setAutoFormatResponse(true)->build();
