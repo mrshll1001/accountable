@@ -2,6 +2,15 @@ mrshll_homepage:
     path:     /
     defaults: { _controller: MrshllSiteBundle:Default:index }
 
+mrshll_orglist:
+    path: /org/
+    defaults: { _controller: MrshllSiteBundle:Default:org }
+
 mrshll_mockup:
     path: /org/mockup
     defaults: { _controller: MrshllSiteBundle:Default:mockup }
+
+
+mrshll_overview:
+    path: /overview
+    defaults: { _controller: MrshllSiteBundle:Default:overview }

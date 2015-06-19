@@ -13,6 +13,15 @@ class DefaultController extends Controller
         return $this->render('MrshllSiteBundle:Page:index.html.twig', array());
     }
 
+
+    /**
+    * Controller for the organisation Page
+    */
+    public function orgAction()
+    {
+      return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array());
+    }
+
     public function mockupAction()
     {
       $org = new OrgModel();
@@ -24,4 +33,13 @@ class DefaultController extends Controller
 
       return $this->render('MrshllSiteBundle:Page/Org:org.html.twig', array('organisation'=>$org));
     }
+
+    /**
+    * Overview Page (GRAPHSSSS)
+    */
+    public function overviewAction()
+    {
+      return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array());
+    }
+
 }
