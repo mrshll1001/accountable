@@ -4,6 +4,8 @@ namespace Mrshll\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Mrshll\SiteBundle\Model\OrgModel;
+
 class DefaultController extends Controller
 {
     public function indexAction()
