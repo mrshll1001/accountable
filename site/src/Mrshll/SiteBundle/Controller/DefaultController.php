@@ -20,8 +20,8 @@ class DefaultController extends Controller
     public function orgAction()
     {
 
-      $orgs = null;
-      return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array());
+      $orgs = OrgModel::getAll();
+      return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array('orgs'=>$orgs));
     }
 
     public function mockupAction()

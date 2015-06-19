@@ -130,6 +130,8 @@ class OrgModel {
       $orgs[] = ['name'=>$node->getProperty('name'), 'id'=>$node->getId()];
     }
 
+    return $orgs;
+
   }
 
   public static function getAllAsGraph()
