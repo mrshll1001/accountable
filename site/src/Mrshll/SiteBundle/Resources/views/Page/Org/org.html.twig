@@ -1,6 +1,6 @@
 {% extends 'MrshllSiteBundle:Page:base.html.twig' %}
 
-{% block title %}A. Charity | Accountable (Mock-Up Page){% endblock title %}
+{% block title %}{{organisation.name}}{% endblock title %}
 
 {% block content %}
 <div class = "container">
@@ -11,7 +11,7 @@
 
     <!-- Description Panel -->
     <div class="col-md-8">
-      {{include('MrshllSiteBundle:Page/Org:descriptionPanel.html.twig')}}
+      {{include('MrshllSiteBundle:Page/Org:descriptionPanel.html.twig', {'description': organisation.description})}}
     </div>
 
     <!-- At a glance panel -->

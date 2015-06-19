@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('MrshllSiteBundle:Default:index.html.twig', array());
+        return $this->render('MrshllSiteBundle:Page:index.html.twig', array());
     }
 
     public function mockupAction()

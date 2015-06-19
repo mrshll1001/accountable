@@ -1,4 +1,4 @@
-mrshll_site_homepage:
+mrshll_homepage:
     path:     /
     defaults: { _controller: MrshllSiteBundle:Default:index }
 
