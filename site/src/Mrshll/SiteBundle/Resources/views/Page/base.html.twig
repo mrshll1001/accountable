@@ -4,10 +4,14 @@
       <title>{% block title %}Default Title Page{% endblock title %} | Accountable</title>
 
       <!-- Importing Bootstrap -->
+      <link rel="stylesheet" href="http://cdn.graphalchemist.com/alchemy.min.css">
       <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css" rel="stylesheet">
       <!-- Importing jquery -->
       <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+      {% block additional %}{% endblock additional %}
+
     {% endblock head %}
   </head>
 
@@ -28,6 +32,10 @@
 
     {% block content %}
       <h1>This is the default content. If you're seeing this, then somebody probably hasn't done their job properly</h1>
+
+
+      
+
     {% endblock content %}
 
 

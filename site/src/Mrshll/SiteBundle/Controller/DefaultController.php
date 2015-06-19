@@ -39,7 +39,9 @@ class DefaultController extends Controller
     */
     public function overviewAction()
     {
-      return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array());
+
+      $nodes = OrgModel::getAll();
+      return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array('nodes'=>$nodes));
     }
 
 }
