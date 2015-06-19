@@ -16,6 +16,6 @@ class DefaultController extends Controller
     public function mockupAction()
     {
       $org = new OrgModel();
-      return $this->render('MrshllSiteBundle:Page:mockup.html.twig', array());
+      return $this->render('MrshllSiteBundle:Page/Org:org.html.twig', array());
     }
 }
