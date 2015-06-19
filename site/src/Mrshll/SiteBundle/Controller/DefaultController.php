@@ -24,6 +24,8 @@ class DefaultController extends Controller
       return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array('orgs'=>$orgs));
     }
 
+
+
     public function mockupAction()
     {
       $org = new OrgModel();

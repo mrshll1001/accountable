@@ -6,6 +6,10 @@ mrshll_orglist:
     path: /org/
     defaults: { _controller: MrshllSiteBundle:Default:org }
 
+mrshll_orgview:
+    path: /org/{id}
+    defaults: { _controller: MrshllSiteBundle:Default:orgView }
+
 mrshll_mockup:
     path: /org/mockup
     defaults: { _controller: MrshllSiteBundle:Default:mockup }
