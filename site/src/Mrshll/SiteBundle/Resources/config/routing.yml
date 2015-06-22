@@ -11,7 +11,7 @@ mrshll_orgview:
     defaults: { _controller: MrshllSiteBundle:Default:orgView }
 
 mrshll_mockup:
-    path: /org/mockup
+    path: /mockup
     defaults: { _controller: MrshllSiteBundle:Default:mockup }
 
 
