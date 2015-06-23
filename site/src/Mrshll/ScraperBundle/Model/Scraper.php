@@ -49,9 +49,18 @@ class Scraper
       array_push($mappedData, $record); // Complete and push data to the new data array
     }
 
-    // Reset $this->data to be the mapped data
-    $this->data = $mappedData;
+    // Convert the string of 'Amount Exc' to an actual numeric value we can run calculations on
+    // Apparently we need yet another array, because of some weird PHP behaviour where I'm unable to modify the original records in $mappedData
+    $fixedData = array();
+    foreach ($mappedData as $record)
+    {
+      $record['cost-value'] = 12345.67;
+      array_push($fixedData, $record);
+    }
 
+
+    // Reset $this->data to be the mapped data
+    $this->data = $fixedData;
     return true;
   }
 
@@ -64,5 +73,16 @@ class Scraper
   public function getData()
   {
     return $this->data;
+  }
+
+
+  /**
+  * Takes the information in $this->data and converts the comma separated strings into numeric values
+  *
+  * @return boolean success
+  */
+  private function convertCostToNumeric($costString)
+  {
+    return floatval(str_replace(',', '', $costString));
   }
 }
