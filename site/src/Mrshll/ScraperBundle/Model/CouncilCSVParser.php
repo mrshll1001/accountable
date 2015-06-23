@@ -7,7 +7,7 @@
 namespace Mrshll\ScraperBundle\Model;
 
 
-class Scraper
+class CouncilCSVParser
 {
   private $file;
   private $url;
@@ -54,7 +54,7 @@ class Scraper
     $fixedData = array();
     foreach ($mappedData as $record)
     {
-      $record['cost-value'] = 12345.67;
+      $record['cost-value'] = $this->convertCostToNumeric($record['Amount Exc']);
       array_push($fixedData, $record);
     }
 

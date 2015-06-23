@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mrshll\SiteBundle\Model\OrgModel;
 
-use Mrshll\ScraperBundle\Model\Scraper;
+use Mrshll\ScraperBundle\Model\CouncilCSVParser;
 
 class DefaultController extends Controller
 {
@@ -57,10 +57,10 @@ class DefaultController extends Controller
     public function testAction()
     {
 
-      $scraper = new Scraper('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
+      $scraper = new CouncilCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
       $scraper->fetchData();
       $output = $scraper->getData();
-      
+      var_dump($output[0]);
       return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
     }
 
