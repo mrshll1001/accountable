@@ -1,0 +1,4 @@
+services:
+#    mrshll_scraper.example:
+#        class: Mrshll\ScraperBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

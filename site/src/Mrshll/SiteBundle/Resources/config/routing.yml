@@ -18,3 +18,7 @@ mrshll_mockup:
 mrshll_overview:
     path: /overview
     defaults: { _controller: MrshllSiteBundle:Default:overview }
+
+mrshll_testpage:
+    path: /test
+    defaults: { _controller: MrshllSiteBundle:Default:test }

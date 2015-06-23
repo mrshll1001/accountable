@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mrshll\SiteBundle\Model\OrgModel;
 
-
+use Mrshll\ScraperBundle\Model\Scraper;
 
 class DefaultController extends Controller
 {
@@ -48,6 +48,20 @@ class DefaultController extends Controller
 
       $nodes = OrgModel::getAllAsGraph();
       return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array('nodes'=>$nodes));
+    }
+
+
+    /**
+    * Test Action. Not to remain in the final Bundle
+    */
+    public function testAction()
+    {
+
+      $scraper = new Scraper('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
+      $scraper->fetchData();
+      $output = $scraper->getData();
+      var_dump($output[6]);
+      return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
     }
 
 }
