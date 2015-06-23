@@ -60,7 +60,7 @@ class DefaultController extends Controller
       $scraper = new Scraper('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
       $scraper->fetchData();
       $output = $scraper->getData();
-      var_dump($output[6]);
+      var_dump($output[0]);
       return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
     }
 

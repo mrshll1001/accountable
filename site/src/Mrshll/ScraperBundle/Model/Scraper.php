@@ -38,6 +38,20 @@ class Scraper
       unset($this->data[$i]);
     }
 
+    // Build up our new data array, each item in data being remapped to keys.
+    $mappedData = array();
+    foreach($this->data as $item)
+    {
+      $record = array(); // New array to hold the values for this record
+      for ($i=0; $i < count($item); $i++) {
+        $record[$headers[$i]] = $item[$i]; // Allocated the contents of item keys in the new record
+      }
+      array_push($mappedData, $record); // Complete and push data to the new data array
+    }
+
+    // Reset $this->data to be the mapped data
+    $this->data = $mappedData;
+
     return true;
   }
 
