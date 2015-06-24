@@ -7,7 +7,7 @@
 namespace Mrshll\SiteBundle\Helper;
 
 
-class CouncilCSVParser
+class NorthumbriaCSVParser
 {
   private $file;
   private $url;

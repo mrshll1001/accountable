@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mrshll\SiteBundle\Model\OrgModel;
 
-use Mrshll\SiteBundle\Helper\CouncilCSVParser;
+use Mrshll\SiteBundle\Helper\NorthumbriaCSVParser;
 
 class DefaultController extends Controller
 {
@@ -57,7 +57,7 @@ class DefaultController extends Controller
     public function testAction()
     {
 
-      $scraper = new CouncilCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
+      $scraper = new NorthumbriaCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
       $scraper->fetchData();
       $output = $scraper->getData();
       var_dump($output[0]);
