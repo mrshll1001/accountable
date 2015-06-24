@@ -1,3 +1,0 @@
-mrshll_scraper_homepage:
-    path:     /
-    defaults: { _controller: MrshllScraperBundle:Default:index }

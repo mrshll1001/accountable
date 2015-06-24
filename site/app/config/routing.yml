@@ -1,7 +1,3 @@
-mrshll_scraper:
-    resource: "@MrshllScraperBundle/Resources/config/routing.yml"
-    prefix:   /scraper
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

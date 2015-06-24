@@ -25,7 +25,6 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Mrshll\SiteBundle\MrshllSiteBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Mrshll\ScraperBundle\MrshllScraperBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
