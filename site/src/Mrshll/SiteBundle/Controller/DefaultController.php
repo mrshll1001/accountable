@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Mrshll\SiteBundle\Model\OrgModel;
 
-use Mrshll\ScraperBundle\Model\CouncilCSVParser;
+use Mrshll\SiteBundle\Helper\CouncilCSVParser;
 
 class DefaultController extends Controller
 {

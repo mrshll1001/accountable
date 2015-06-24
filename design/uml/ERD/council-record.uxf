@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>120</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Council
+--
+id: int
+name: str
+records: &lt;list | Record&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>90</y>
+      <w>180</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Record
+--
+id: int
+council_id: int
+vendor: str
+amount: float
+category: str
+service: str
+description: str</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>130</y>
+      <w>140</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+1...n</panel_attributes>
+    <additional_attributes>120.0;10.0;60.0;10.0;60.0;60.0;10.0;60.0</additional_attributes>
+  </element>
+</diagram>

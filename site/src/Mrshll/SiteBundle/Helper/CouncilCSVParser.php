@@ -4,7 +4,7 @@
 * Class to scrape a CSV file based on the url given; specific to the council
 */
 
-namespace Mrshll\ScraperBundle\Model;
+namespace Mrshll\SiteBundle\Helper;
 
 
 class CouncilCSVParser
