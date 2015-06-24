@@ -12,18 +12,60 @@
     <div class="row">
       <div class="col-md-12">
         <h1>Test Page</h1>
-        <p>This page is a test page designed to test various layouts, features, etc. before they make it into a final version with their own controller. See <em>MrshllSiteBundle::Default:testAction()</em> for associated logic</p>.
+        <p>This page is a test page designed to test various layouts, features, etc. before they make it into a final version with their own controller. See <em>MrshllSiteBundle::Default:testAction()</em> for associated logic.</p>
       </div>
     </div>
 
 
     <div class="row">
-      
+      <div class="col-md-3">
+        <form>
+          <input type="text" class="form-control" id="councilName" placeholder="Council's Name" />
+          <button type="button" id="createCouncilBtn" class="btn btn-primary">Create</button>
+        </form>
+      </div>
     </div>
 
 
-
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Council list (test)</h2>
+        {% for council in councilList %}
+          <p>{{council.name}} | {{council.id}}</p>
+        {% endfor %}
+      </div>
+    </div>
 
   </div> <!-- End container -->
+
+<script>
+
+  /**
+   * Controller for the council creation form
+   */
+  $('#createCouncilBtn').click(function(e){
+
+    var name = $('#councilName').val();
+    var data = JSON.stringify({name: name});
+
+    $.ajax({
+      url: '{{url('council_create')}}',
+      data: data,
+      method: 'POST',
+      content: 'application/JSON',
+      success: function(response){
+        alert(response);
+      },
+      error: function(response){
+        alert('There was an error completing the action');
+      }
+    });
+
+    /**
+     * Controller for the council deleteAction
+     */
+
+  });
+</script>
 
 {% endblock content %}

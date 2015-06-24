@@ -6,9 +6,9 @@ mrshll_orglist:
     path: /org/
     defaults: { _controller: MrshllSiteBundle:Default:org }
 
-mrshll_orgview:
-    path: /org/{id}
-    defaults: { _controller: MrshllSiteBundle:Default:orgView }
+mrshll_councilsview:
+    path: /councils
+    defaults: { _controller: MrshllSiteBundle:Default:viewCouncils }
 
 mrshll_mockup:
     path: /mockup
@@ -22,3 +22,8 @@ mrshll_overview:
 mrshll_testpage:
     path: /test
     defaults: { _controller: MrshllSiteBundle:Default:test }
+
+council_create:
+    path: /council/create
+    defaults: { _controller: MrshllSiteBundle:Council:create }
+    methods: [POST]

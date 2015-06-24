@@ -3,11 +3,9 @@
 namespace Mrshll\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Mrshll\SiteBundle\Model\OrgModel;
-
 use Mrshll\SiteBundle\Helper\NorthumbriaCSVParser;
-
+use Mrshll\SiteBundle\Entity\Council;
 class DefaultController extends Controller
 {
     public function indexAction()
@@ -15,17 +13,16 @@ class DefaultController extends Controller
         return $this->render('MrshllSiteBundle:Page:index.html.twig', array());
     }
 
-
-    /**
-    * Controller for the organisation Page
-    */
-    public function orgAction()
+  /**
+   * Council list page
+   *
+   */
+    public function viewCouncilsAction()
     {
+      $councilList = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findAll();
 
-      $orgs = OrgModel::getAll();
-      return $this->render('MrshllSiteBundle:Page/Org:orgList.html.twig', array('orgs'=>$orgs));
+      return $this->render('MrshllSiteBundle:Page/Council:councillist.html.twig', array('councilList'=>$councilList));
     }
-
 
 
     public function mockupAction()
@@ -56,12 +53,9 @@ class DefaultController extends Controller
     */
     public function testAction()
     {
-
-      $scraper = new NorthumbriaCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
-      $scraper->fetchData();
-      $output = $scraper->getData();
-      var_dump($output[0]);
-      return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
+      // Get a list of the councils
+      $councilList = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findAll();
+      return $this->render('MrshllSiteBundle:Page:test.html.twig', array('councilList'=>$councilList));
     }
 
 }
