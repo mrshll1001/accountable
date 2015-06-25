@@ -2,14 +2,6 @@ mrshll_homepage:
     path:     /
     defaults: { _controller: MrshllSiteBundle:Default:index }
 
-mrshll_orglist:
-    path: /org/
-    defaults: { _controller: MrshllSiteBundle:Default:org }
-
-mrshll_councilsview:
-    path: /councils
-    defaults: { _controller: MrshllSiteBundle:Default:viewCouncils }
-
 mrshll_mockup:
     path: /mockup
     defaults: { _controller: MrshllSiteBundle:Default:mockup }
@@ -23,7 +15,6 @@ mrshll_testpage:
     path: /test
     defaults: { _controller: MrshllSiteBundle:Default:test }
 
-council_create:
-    path: /council/create
-    defaults: { _controller: MrshllSiteBundle:Council:create }
-    methods: [POST]
+council_routes:
+    resource: "@MrshllSiteBundle/Resources/config/councilRoutes.yml"
+    prefix: /council
