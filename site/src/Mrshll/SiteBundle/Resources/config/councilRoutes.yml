@@ -16,3 +16,13 @@ council_delete:
   path: /delete
   defaults: { _controller: MrshllSiteBundle:Council:delete }
   methods: [POST]
+
+council_record_add:
+  path: /addrecord
+  defaults: { _controller: MrshllSiteBundle:Council:addRecord }
+  methods: [POST]
+
+council_record_remove:
+  path: /removerecord
+  defaults: { _controller: MrshllSiteBundle:Council:removeRecord }
+  methods: [POST]
