@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CouncilController extends Controller
 {
+  /**
+   * Creates a council in the database
+   */
   public function createAction()
   {
     // Get the JSON data from the request
@@ -25,6 +28,9 @@ class CouncilController extends Controller
     return new Response('Council Created with ID: '.$council->getId());
   }
 
+  /**
+   * Removes a council from the database
+   */
   public function deleteAction()
   {
     // Get the JSOn data from the request
@@ -41,4 +47,24 @@ class CouncilController extends Controller
     // Return the response
     return new Response('Council Item has been removed from the database');
   }
+
+  /**
+   * Adds a record to the council
+   */
+   public function addRecordAction()
+   {
+     //  ...
+     return new Response('Record has been added successfully');
+   }
+
+   /**
+    * Removes a record from the council
+    */
+    public function removeRecordAction()
+    {
+      // ...
+      return new Response('Record has been removed successfully');
+    }
+
+
 }
