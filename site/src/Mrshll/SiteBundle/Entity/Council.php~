@@ -70,37 +70,4 @@ class Council
     {
         return $this->name;
     }
-
-    /**
-     * Add records
-     *
-     * @param \Mrshll\SiteBundle\Entity\Record $records
-     * @return Council
-     */
-    public function addRecord(\Mrshll\SiteBundle\Entity\Record $records)
-    {
-        $this->records[] = $records;
-
-        return $this;
-    }
-
-    /**
-     * Remove records
-     *
-     * @param \Mrshll\SiteBundle\Entity\Record $records
-     */
-    public function removeRecord(\Mrshll\SiteBundle\Entity\Record $records)
-    {
-        $this->records->removeElement($records);
-    }
-
-    /**
-     * Get records
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRecords()
-    {
-        return $this->records;
-    }
 }

@@ -11,3 +11,8 @@ council_create:
     path: /create
     defaults: { _controller: MrshllSiteBundle:Council:create }
     methods: [POST]
+
+council_delete:
+  path: /delete
+  defaults: { _controller: MrshllSiteBundle:Council:delete }
+  methods: [POST]
