@@ -26,3 +26,8 @@ council_record_remove:
   path: /removerecord
   defaults: { _controller: MrshllSiteBundle:Council:removeRecord }
   methods: [POST]
+
+council_record_nuke:
+  path: /nukerecords
+  defaults: { _controller: MrshllSiteBundle:Council:nukeRecords }
+  methods: [POST]

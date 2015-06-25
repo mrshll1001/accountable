@@ -123,7 +123,7 @@ class CouncilController extends Controller
         $em->remove($record);
       }
 
-      // Flush and return
+      // Persist, Flush and return
       $em->flush();
 
       return new Response('The Records have been Nuked');
