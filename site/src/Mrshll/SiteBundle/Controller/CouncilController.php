@@ -67,7 +67,7 @@ class CouncilController extends Controller
       $record->setDescription($data->description);
 
       // Retrieve the council from the database
-      $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->find($data->council);
+      $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->find($data->councilId);
 
       // Set the record to have this council, and persist the both of them.
       $record->setCouncil($council);
@@ -87,7 +87,19 @@ class CouncilController extends Controller
     */
     public function removeRecordAction()
     {
-      // ...
+      // Get JSON data from the request
+      $data = json_decode($this->get('request')->getContent());
+
+      // Load the record
+      $record = $this->getDoctrine()->getRepository('MrshllSiteBundle:Record')->find($data->recordId);
+
+      // Get the entity manage and remove the record
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($record);
+
+      // Flush
+      $em->flush();
+
       return new Response('Record has been removed successfully');
     }
 
