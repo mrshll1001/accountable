@@ -83,7 +83,7 @@ class CouncilController extends Controller
    }
 
    /**
-    * Removes a record from the council
+    * Removes a record from the council -- WARNING! THIS WILL REMOVE THE RECORD FROM THE ENTIRE DATABASE
     */
     public function removeRecordAction()
     {
@@ -102,6 +102,33 @@ class CouncilController extends Controller
 
       return new Response('Record has been removed successfully');
     }
+
+    /**
+     * Nukes all records on a council -- WARNING! THIS WILL REMOVE ALL RECORDS FROM THE ENTIR DATABASE
+     */
+     public function nukeRecordsAction()
+     {
+      //  Get the JSON Data from the request
+      $data = json_decode($this->get('request')->getContent());
+
+      // Load the council from the database
+      $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->find($data->councilId);
+
+      // Get an entity manager to handle removal
+      $em = $this->getDoctrine()->getManager();
+
+      // Remove all the records from the council (BURN THEM ALLLLLL)
+      foreach($council->getRecords() as $record)
+      {
+        $em->remove($record);
+      }
+
+      // Flush and return
+      $em->flush();
+
+      return new Response('The Records have been Nuked');
+
+     }
 
 
 }
