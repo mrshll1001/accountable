@@ -24,28 +24,16 @@ class DefaultController extends Controller
       return $this->render('MrshllSiteBundle:Page/Council:councillist.html.twig', array('councilList'=>$councilList));
     }
 
+  /**
+   * View Northumbria Council
+   *
+   */
+   public function viewNorthumbriaAction()
+   {
+     $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
+     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('council'=>$council));
+   }
 
-    public function mockupAction()
-    {
-      $org = new OrgModel();
-
-      $org->setName("Marshall's Charity");
-      $org->setDescription("This is the description of Marshall's Charity");
-      $org->setWebsite("http://www.mrshll.uk");
-      $org->getAllProjects();
-
-      return $this->render('MrshllSiteBundle:Page/Org:org.html.twig', array('organisation'=>$org));
-    }
-
-    /**
-    * Overview Page (GRAPHSSSS)
-    */
-    public function overviewAction()
-    {
-
-      $nodes = OrgModel::getAllAsGraph();
-      return $this->render('MrshllSiteBundle:Page/Overview:overview.html.twig', array('nodes'=>$nodes));
-    }
 
 
     /**

@@ -4,7 +4,7 @@ namespace Mrshll\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Mrshll\SiteBundle\Helper\NorthumbriaCSVParser;
-use Mrshll\SiteBundle\Entity\
+use Mrshll\SiteBundle\Entity\Record;
 
 
 class ScraperController extends Controller
@@ -30,9 +30,10 @@ class ScraperController extends Controller
      foreach($councilData as $item)
      {
        $record = new Record();
-       $record->setVendor
+      //  $record->setVendor
 
       //  FINISH ME!!!!!
+      return true;
      }
    }
 

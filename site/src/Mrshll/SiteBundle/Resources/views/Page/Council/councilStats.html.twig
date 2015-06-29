@@ -1,0 +1,60 @@
+{% extends 'MrshllSiteBundle:Page:base.html.twig' %}
+
+{% block content %}
+<div class="container">
+
+  <h1 class="council-name" id="{{council.id}}">{{council.name}}</h1>
+
+  {# We put everything inside one row, with multiple sub-rows in the columns for the far panel. TO achieve the layout we want  #}
+  <div class="row">
+    {# Comparisons panel(s) #}
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>Data comparisons go here</p>
+        </div>
+      </div>
+    </div>
+
+    {# Column of various bits of data (this is where the charts live) #}
+    <div class="col-md-4">
+
+      {# Category spread (doughnut chart) #}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Doughnut chart</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {# Top 3 Vendors #}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Vendor Chart!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {# Payments #}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Payment charts</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div><!-- End container -->
+
+{% endblock content %}

@@ -2,14 +2,6 @@ mrshll_homepage:
     path:     /
     defaults: { _controller: MrshllSiteBundle:Default:index }
 
-mrshll_mockup:
-    path: /mockup
-    defaults: { _controller: MrshllSiteBundle:Default:mockup }
-
-
-mrshll_overview:
-    path: /overview
-    defaults: { _controller: MrshllSiteBundle:Default:overview }
 
 mrshll_testpage:
     path: /test

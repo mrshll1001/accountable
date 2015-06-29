@@ -4,8 +4,8 @@ council_list:
 
 
 council_page:
-  path: /view/{id}
-  defaults: { _controller: MrshllSiteBundle:Default:viewCouncilPage }
+  path: /view/northumbria
+  defaults: { _controller: MrshllSiteBundle:Default:viewNorthumbria }
 
 council_create:
     path: /create
