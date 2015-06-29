@@ -10,15 +10,37 @@ namespace Mrshll\SiteBundle\Helper;
 class NorthumbriaCSVParser
 {
   private $file;
-  private $url;
   private $data;
 
 
-  public function __construct($url = null)
+  public function __construct()
   {
-    $this->url = $url;
+
   }
 
+  /**
+   * Scrapes the Northumbria Council Page for CSV data
+   *
+   */
+   public function scrapeData()
+   {
+     //  Set up an array for the data
+     $dataArray = array();
+
+     // Visit the site rendered by the Northumberland .gov
+     $siteData = file_get_contents('http://www.northumberland.gov.uk/default.aspx?page=9100');
+
+     // Match the links
+     $regex = '/idoc[^&]*/';
+     preg_match_all($regex, $siteData,$matches);
+
+     foreach($matches[0] as $item)
+     {
+       $dataArray[] = "http://northumberland.gov.uk/".$item."&version=-1";
+     }
+
+     return $dataArray;
+   }
 
   /**
   * Fetches the CSV at the designated URL, turns it into an array and stores it
@@ -26,10 +48,10 @@ class NorthumbriaCSVParser
   *
   * @return boolean success
   */
-  public function fetchData()
+  public function fetchData($url)
   {
     // Connect to the file and get the data.
-    $this->data = array_map('str_getcsv', file($this->url));
+    $this->data = array_map('str_getcsv', file($url));
     $headers = $this->data[4]; // Get the headers for the data
 
     // Unset all the useless guff (indices 0-5) that comes with it, including the headers as we have them.

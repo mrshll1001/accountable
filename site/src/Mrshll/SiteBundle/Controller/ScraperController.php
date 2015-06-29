@@ -37,7 +37,4 @@ class ScraperController extends Controller
      }
    }
 
-   /**
-    * 
-
 }
