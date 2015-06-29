@@ -23,6 +23,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Spending Breakdown</h3>
+            </div>
             <div class="panel-body">
               <canvas id="test-doughnut"></canvas>
             </div>
@@ -68,10 +71,34 @@
   </div>
 </div><!-- End container -->
 
-<script type="text/javascript" src="{{asset('js/chartjs/Chart.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('/js/chart-js/Chart.js')}}"></script>
 
 <script type="text/javascript">
+ var ctx = document.getElementById("test-doughnut").getContext("2d");
+ var data = [
+    {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Adult Social Care"
+    },
+    {
+        value: 150,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Regional Growth Fund"
+    },
+    {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Children's and Educational Services"
+    }
+];
 
+
+ var chart = new Chart(ctx).Doughnut(data);
 </script>
 
 {% endblock content %}
