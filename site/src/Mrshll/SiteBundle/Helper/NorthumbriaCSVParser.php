@@ -24,45 +24,51 @@ class NorthumbriaCSVParser
    */
    public function scrapeData()
    {
-     //  Set up an array for the data
-     $dataArray = array();
-
      // Visit the site rendered by the Northumberland .gov
      $siteData = file_get_contents('http://www.northumberland.gov.uk/default.aspx?page=9100');
 
      // Match the links
-     $regex = '/idoc[^&]*/';
+    //  $regex = '/idoc[^&]*/';
+    $regex = '/(idoc[^&]*)[^>]*>CSV/';
      preg_match_all($regex, $siteData,$matches);
 
-     foreach($matches[0] as $item)
+     // Take each of the matches as an item and turn it into a full URL for parsing
+     $urls = array();
+     foreach($matches[1] as $item)
      {
-       $dataArray[] = "http://northumberland.gov.uk/".$item."&version=-1";
+       $urls[] = "http://northumberland.gov.uk/".$item."&version=-1";
      }
 
-     return $dataArray;
+
+     // Take each of the URLS and parse its CSV file
+     foreach($urls as $url)
+     {
+       $data = $this->parseCSV($url);
+     }
+
    }
 
   /**
   * Fetches the CSV at the designated URL, turns it into an array and stores it
   * in the $data variable. Returns a boolean to indicate success
   *
-  * @return boolean success
+  * @return Array fixedData
   */
-  public function fetchData($url)
+  private function parseCSV($url)
   {
     // Connect to the file and get the data.
-    $this->data = array_map('str_getcsv', file($url));
-    $headers = $this->data[4]; // Get the headers for the data
+    $data = array_map('str_getcsv', file($url));
+    $headers = $data[4]; // Get the headers for the data
 
     // Unset all the useless guff (indices 0-5) that comes with it, including the headers as we have them.
     for ($i=0; $i < 6; $i++)
     {
-      unset($this->data[$i]);
+      unset($data[$i]);
     }
 
     // Build up our new data array, each item in data being remapped to keys.
     $mappedData = array();
-    foreach($this->data as $item)
+    foreach($data as $item)
     {
       $record = array(); // New array to hold the values for this record
       for ($i=0; $i < count($item); $i++) {
@@ -70,21 +76,20 @@ class NorthumbriaCSVParser
       }
       array_push($mappedData, $record); // Complete and push data to the new data array
     }
-
     // Convert the string of 'Amount Exc' to an actual numeric value we can run calculations on
     // Apparently we need yet another array, because of some weird PHP behaviour where I'm unable to modify the original records in $mappedData
     $fixedData = array();
     foreach ($mappedData as $record)
     {
+      var_dump(array_keys($record));
       $record['cost-value'] = $this->convertCostToNumeric($record['Amount Exc']);
       $record['date'] = $this->convertDateFormat($record['Payment ']);
       array_push($fixedData, $record);
     }
 
 
-    // Reset $this->data to be the mapped data
-    $this->data = $fixedData;
-    return true;
+    // Return the fixed data
+    return $fixedData;
   }
 
 

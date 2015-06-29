@@ -43,7 +43,7 @@ class DefaultController extends Controller
     {
       // $parser = new NorthumbriaCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
       $parser = new NorthumbriaCSVParser();
-      var_dump($parser->scrapeData());
+      $parser->scrapeData();
       return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
     }
 
