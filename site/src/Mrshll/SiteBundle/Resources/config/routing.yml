@@ -18,3 +18,7 @@ mrshll_testpage:
 council_routes:
     resource: "@MrshllSiteBundle/Resources/config/councilRoutes.yml"
     prefix: /council
+
+scraper_routes:
+    resource: "@MrshllSiteBundle/Resources/config/scraperRoutes.yml"
+    prefix: /scraper

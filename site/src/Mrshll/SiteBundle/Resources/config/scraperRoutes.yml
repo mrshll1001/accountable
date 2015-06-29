@@ -1,0 +1,4 @@
+parse_one_northumbria:
+  path: /parseone/northumbria
+  defaults: { _controller: MrshllSiteBundle:Scraper:parseOneNorthumbria }
+  methods: [POST]
