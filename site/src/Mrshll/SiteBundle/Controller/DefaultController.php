@@ -36,9 +36,11 @@ class DefaultController extends Controller
     $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findAll();
     $helper = new RecordHelper();
 
+    // Get the data for display
     $spendData = $helper->spendData($records);
+    $serviceMap = $helper->serviceMap($records);
 
-     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumbria County Council", 'spend'=>$spendData));
+     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumbria County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap));
    }
 
 

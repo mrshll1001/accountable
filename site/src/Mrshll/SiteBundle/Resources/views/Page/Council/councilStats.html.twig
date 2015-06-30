@@ -26,20 +26,37 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Spending Info</h3>
+              <h3 class="panel-title">Spending Info (based on {{spend.count}} records)</h3>
             </div>
             <div class="panel-body">
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <td>Info</td>
-                    <td>Amount</td>
+                    <th>Info</th>
+                    <th>Amount</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <td>Total Spend</td>
-                  <td>£{{spend.total}}<td>
+                  <tr>
+                    <td>Total Spend</td>
+                    <td>£{{spend.total|number_format(2, '.', ',')}}<td>
+                  </tr>
+
+                  <tr>
+                    <td>Largest Spend</td>
+                    <td>£{{spend.largest|number_format(2, '.', ',')}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Smallest Spend</td>
+                    <td>£{{spend.smallest|number_format(2, '.', ',')}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Average Spend</td>
+                    <td>£{{spend.average|number_format(2, '.', ',')}}</td>
+                  </tr>
                 </tbody>
 
               </table>
@@ -57,6 +74,24 @@
             </div>
             <div class="panel-body">
               <canvas id="test-doughnut"></canvas>
+
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Spend</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {% for item in servicemap %}
+                    <tr>
+                      <td>{{item.name}}</td>
+                      <td>£{{item.value|number_format(2, '.', ',')}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -71,6 +106,7 @@
             </div>
             <div class="panel-body">
               <canvas id="test-spending"></canvas>
+
             </div>
           </div>
         </div>
@@ -116,26 +152,27 @@
  var data = [
     {
         value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
+        color:getRandomColor(),
         label: "Adult Social Care"
     },
     {
         value: 150,
-        color: "#46BFBD",
+        color: getRandomColor(),
         highlight: "#5AD3D1",
         label: "Regional Growth Fund"
     },
     {
         value: 100,
-        color: "#FDB45C",
+        color: getRandomColor(),
         highlight: "#FFC870",
         label: "Children's and Educational Services"
     }
 ];
 
+var newData = [ {% for item in servicemap %} {value:{{item.value}}, color:getRandomColor(), label:"{{item.name}}" }, {% endfor %} ];
 
- var chart = new Chart(ctx).Doughnut(data);
+
+ var chart = new Chart(ctx).Pie(newData);
 
  ctx = document.getElementById("test-spending").getContext("2d");
  data = {
@@ -192,6 +229,17 @@ var myLineChart = new Chart(ctx).Line(data);
 
 var myRadarChart = new Chart(ctx).Radar(data);
 
+/**
+ * Generates a random colour for charting purposes
+ */
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
 </script>
 
