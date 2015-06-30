@@ -6,15 +6,138 @@
 
  namespace Mrshll\SiteBundle\Helper;
 
+ use Mrshll\SiteBundle\Entity\CouncilRecord;
  class CSVParser
  {
+   private $em;
 
+   private $northumbriaCode = 'NORTHUMBRIA';
+
+
+
+   public function __construct(\Doctrine\ORM\EntityManager $em)
+   {
+     $this->em = $em;
+   }
    /**
-    * Parses all the Northumbria CSVs
+    * Retrieves all the Northumbria CSVs
     *
     */
-    public function parseNorthumbria()
+    public function getNorthumbriaData()
     {
-      
+      // Get the folder where the CSVs are stored
+      $dir = __DIR__.'/../../../../web/csv/northumbria/';
+      $files = scandir($dir);
+
+      // Iterate over the directory and parse the content
+      foreach($files as $file)
+      {
+        if($file !== '.' && $file !== '..' && $file !== '.DS_Store')
+        {
+          // Parse the data, can't store it all as it's too big.
+          $data = $this->parseNorthumbriaCSV($dir.$file);
+
+          // var_dump(array_keys($data[0]));
+
+          // Fix the data
+          $data = $this->fixNorthumbriaData($data);
+
+          // Next, since we can't pass it out (lack of memory I think)
+          // We instead pass it to Doctrine to keep a hold of
+          $this->storeFixedData($data, $this->northumbriaCode);
+
+        }
+
+      }
+
+      return;
     }
+
+
+    /**
+     * Stores Parsed (and fixed) data
+     *
+     */
+     private function storeFixedData($data, $councilCode)
+     {
+       // Iterate over each item in data and update it in the database
+       foreach($data as $item)
+       {
+        //  Dispense a CouncilRecord
+        $record = new CouncilRecord();
+
+        // Set the guff
+        $record->setCouncilcode($councilCode);
+        $record->setVendor($item['vendor']);
+        $record->setValue($item['value']);
+        $record->setService($item['service']);
+        // $record->setDescription($item['description']);
+        $record->setReference($item['reference']);
+
+        // Persist that mother
+        $this->em->persist($record);
+       }
+       $this->em->flush();
+       return;
+     }
+
+    /**
+     * Fixes Parsed Northumbria data
+     */
+     private function fixNorthumbriaData($data)
+     {
+       $fixedData = array();
+
+       // Iterate over the data array, and convert all the keys to shit we can understand
+       foreach($data as $item)
+       {
+         $fixedItem = array();
+         $fixedItem['vendor'] = utf8_encode($item['Vendor Name']);
+         $fixedItem['value'] = floatval(str_replace(',', '', $item['Amount Exc']));
+         $fixedItem['service'] = $item['Service Responsible for Spend'];
+        //  $fixedItem['description'] = $item['Subjective'];
+         $fixedItem['reference'] = $item['Invoice'];
+
+         array_push($fixedData, $fixedItem);
+       }
+
+       return $fixedData;
+
+     }
+
+    /**
+     * Parses a single Northumbria CSV file, returns the array without modification
+     */
+    private function parseNorthumbriaCSV($csv)
+    {
+      // Connect to file and retrieve data
+      $data = array_map('str_getcsv', file($csv));
+
+      // Set the headers, remove guff data and clean up.
+      $headers = $data[4];
+
+
+      // Unset all the useless guff (indices 0-5) that comes with it, including the headers as we have them.
+      for ($i=0; $i < 6; $i++)
+      {
+        unset($data[$i]);
+      }
+
+      // Build up our new data array, each item in data being remapped to keys.
+      $mappedData = array();
+      foreach($data as $item)
+      {
+        $record = array(); // New array to hold the values for this record
+        for ($i=0; $i < count($item); $i++) {
+          $record[$headers[$i]] = $item[$i]; // Allocated the contents of item keys in the new record
+        }
+        array_push($mappedData, $record); // Complete and push data to the new data array
+      }
+
+
+      return $mappedData;
+
+    }
+
+
  }
