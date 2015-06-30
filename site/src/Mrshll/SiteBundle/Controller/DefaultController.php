@@ -5,6 +5,7 @@ namespace Mrshll\SiteBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Mrshll\SiteBundle\Model\OrgModel;
 use Mrshll\SiteBundle\Helper\CSVParser;
+use Mrshll\SiteBundle\Helper\RecordHelper;
 use Mrshll\SiteBundle\Entity\Council;
 class DefaultController extends Controller
 {
@@ -31,8 +32,13 @@ class DefaultController extends Controller
    */
    public function viewNorthumbriaAction()
    {
-     $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
-     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('council'=>$council));
+    //  $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
+    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findAll();
+    $helper = new RecordHelper();
+
+    $spendData = $helper->spendData($records);
+
+     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumbria County Council", 'spend'=>$spendData));
    }
 
 

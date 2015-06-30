@@ -1,9 +1,11 @@
 {% extends 'MrshllSiteBundle:Page:base.html.twig' %}
 
+{% block title %}{{name}}{% endblock title %}
+
 {% block content %}
 <div class="container">
 
-  <h1 class="council-name" id="{{council.id}}">{{council.name}}</h1>
+  <h1 class="council-name">{{name}}</h1>
 
   {# We put everything inside one row, with multiple sub-rows in the columns for the far panel. TO achieve the layout we want  #}
   <div class="row">
@@ -18,6 +20,33 @@
 
     {# Column of various bits of data (this is where the charts live) #}
     <div class="col-md-4">
+
+      {# Spending Numbers #}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Spending Info</h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <td>Info</td>
+                    <td>Amount</td>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <td>Total Spend</td>
+                  <td>£{{spend.total}}<td>
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {# Category spread (doughnut chart) #}
       <div class="row">
