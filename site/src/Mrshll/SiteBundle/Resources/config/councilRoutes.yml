@@ -3,7 +3,7 @@ council_list:
   defaults: { _controller: MrshllSiteBundle:Default:viewCouncils }
 
 
-council_page:
+council_north:
   path: /view/northumbria
   defaults: { _controller: MrshllSiteBundle:Default:viewNorthumbria }
 

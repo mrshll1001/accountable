@@ -19,9 +19,10 @@ class DefaultController extends Controller
    */
     public function viewCouncilsAction()
     {
-      $councilList = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findAll();
+      // Hard coding information now for speed rather than mess with trying to get them in the database.
+      // $councilList = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findAll();
 
-      return $this->render('MrshllSiteBundle:Page/Council:councillist.html.twig', array('councilList'=>$councilList));
+      return $this->render('MrshllSiteBundle:Page/Council:councillist.html.twig', array());
     }
 
   /**

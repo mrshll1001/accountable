@@ -81,7 +81,7 @@ class NorthumbriaCSVParser
     $fixedData = array();
     foreach ($mappedData as $record)
     {
-      var_dump(array_keys($record));
+      var_dump(array_keys());
       $record['cost-value'] = $this->convertCostToNumeric($record['Amount Exc']);
       $record['date'] = $this->convertDateFormat($record['Payment ']);
       array_push($fixedData, $record);
