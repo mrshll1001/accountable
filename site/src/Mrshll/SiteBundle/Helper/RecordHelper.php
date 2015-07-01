@@ -49,7 +49,7 @@ class RecordHelper
   }
 
   /**
-   * Returns a map of totals spent on/by a given service
+   * Returns a map of totals spent on/by a given service, ordered by spend
    */
    public function serviceMap($records)
    {
@@ -57,14 +57,18 @@ class RecordHelper
      $mappings = array();
      foreach($records as $record)
      {
-       if(array_key_exists($record->getService(), $mappings))
+
+       if(array_key_exists(trim($record->getService()), $mappings))
        {
-         $mappings[$record->getService()] = $mappings[$record->getService()] + $record->getValue();
+         $mappings[trim($record->getService())] = $mappings[trim($record->getService())] + $record->getValue();
        }else
        {
-         $mappings[$record->getService()] = $record->getValue();
+         $mappings[trim($record->getService())] = $record->getValue();
        }
      }
+
+     // Sort the mappings from highest to lowest
+     arsort($mappings);
 
      // Now we have mappings, we need to extract the key-value pairs properly so we don't actually need to know the key later!
      $map = array();
@@ -74,4 +78,75 @@ class RecordHelper
      return $map;
 
    }
+
+   /**
+    * Returns a map of the top n used vendors, by cost
+    */
+    public function topVendorsByCost($records, $n)
+    {
+      // Set up the mappings
+      $mappings = array();
+      foreach($records as $record)
+      {
+        if(array_key_exists(trim($record->getVendor()), $mappings))
+        {
+          $mappings[trim($record->getVendor())] = $mappings[trim($record->getVendor())] + $record->getValue();
+        } else
+        {
+          $mappings[trim($record->getVendor())] = $record->getValue();
+        }
+
+      }
+
+      // Sort in descending order
+      arsort($mappings);
+
+      // Return a subset with the appropriate details
+      return $this->vendorSubset($mappings, $n);
+
+
+    }
+
+    /**
+     * Returns a map of the top n used vendors, by frequency
+     */
+     public function topVendorsByFrequency($records, $n)
+     {
+       // Set up the mappings
+       $mappings = array();
+       foreach ($records as $record)
+       {
+         // Check the array key exists
+         if(array_key_exists(trim($record->getVendor()), $mappings))
+         {
+           $mappings[trim($record->getVendor())] = $mappings[trim($record->getVendor())] + 1;
+         } else
+         {
+            $mappings[trim($record->getVendor())] = 1;
+         }
+
+       }
+
+       // Sort the array in descending order
+       arsort($mappings);
+
+       // Return a subset of the array with appropriate details
+       return $this->vendorSubset($mappings, $n);
+
+
+     }
+
+     /**
+      * Returns a subset of n array, mapped by vendor name and value
+      */
+      private function vendorSubset($mappings, $n)
+      {
+        $map = array();
+        foreach(array_slice($mappings, 0, $n) as $key=>$value)
+        {
+          $map[] = ['name'=>$key, 'value'=>$value];
+        }
+        return $map;
+      }
+
 }

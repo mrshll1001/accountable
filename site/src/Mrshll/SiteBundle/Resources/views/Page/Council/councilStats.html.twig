@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
 
-  <h1 class="council-name">{{name}}</h1>
+  <h1 class="council-name">{{name}} <small>Based on {{spend.count}} records</small></h1>
 
   {# We put everything inside one row, with multiple sub-rows in the columns for the far panel. TO achieve the layout we want  #}
   <div class="row">
@@ -14,6 +14,9 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <p>Data comparisons go here</p>
+          {% for vendor in vendors.byFrequency %}
+            <p>{{vendor.name}} | {{vendor.value}}</p>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -26,7 +29,7 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Spending Info (based on {{spend.count}} records)</h3>
+              <h3 class="panel-title">Spending Info</h3>
             </div>
             <div class="panel-body">
               <table class="table table-hover">
@@ -70,12 +73,13 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Spending Breakdown</h3>
+              <h3 class="panel-title">Spending via Service</h3>
             </div>
             <div class="panel-body">
               <canvas id="test-doughnut"></canvas>
 
-              <table class="table table-hover">
+              <a role="button" data-toggle="collapse" href="#service-table">Expand / Collapse</a>
+              <table id="service-table" class="table table-hover collapse">
                   <thead>
                     <tr>
                       <th>Service</th>
@@ -97,30 +101,32 @@
         </div>
       </div>
 
-      {# Spend by month #}
+      {# Spend via Vendor #}
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Spending by Month</h3>
+              <h3 class="panel-title">Top {{vendors.n}} Vendors by Frequency</h3>
             </div>
             <div class="panel-body">
               <canvas id="test-spending"></canvas>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {# Top 3 Vendors #}
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Frequent Vendors</h3>
-            </div>
-            <div class="panel-body">
-              <canvas id="test-vendor"></canvas>
+              <a role="button" data-toggle="collapse" href="#frequentVendorsTable">Expand / Collapse</a>
+              <table class="table table-hover collapse" id="frequentVendorsTable">
+                <thead>
+                  <tr>
+                    <th>Vendor Name</th>
+                    <th>No. of Payments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for vendor in vendors.byFrequency %}
+                  <tr>
+                    <td>{{vendor.name}}<td>
+                      <td>{{vendor.value}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -130,8 +136,30 @@
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Top {{vendors.n}} Vendors by Payment Total</h3>
+            </div>
             <div class="panel-body">
-              <p>Payment charts</p>
+              <canvas id="top-vendors-cost-chart"></canvas>
+              <a role="button" data-toggle="collapse" href="#costVendorsTable">Expand / Collapse</a>
+              <table class="table table-hover collapse" id="costVendorsTable">
+                <thead>
+                  <tr>
+                    <th>Vendor Name</th>
+                    <th>Total Paid to Vendor</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for vendor in vendors.byCost %}
+                  <tr>
+                    <td>{{vendor.name}}</td>
+                    <td>£{{vendor.value|number_format(2, '.', ',')}}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+
             </div>
           </div>
         </div>
@@ -174,60 +202,53 @@ var newData = [ {% for item in servicemap %} {value:{{item.value}}, color:getRan
 
  var chart = new Chart(ctx).Pie(newData);
 
+
+ vendorLabels = [];
+ vendorData = [];
+ {% for vendor in vendors.byFrequency %}
+ vendorLabels.push("{{vendor.name}}".split(' ')[0]);
+ vendorData.push({{vendor.value}});
+ {% endfor %}
+
  ctx = document.getElementById("test-spending").getContext("2d");
  data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: vendorLabels,
     datasets: [
         {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            label: "Vendors",
+            fillColor: getRandomColor(),
+            data: vendorData
         }
     ]
 };
 
-var myLineChart = new Chart(ctx).Line(data);
 
- ctx = document.getElementById("test-vendor").getContext("2d");
 
- data = data = {
-    labels: ["ACOMB COURT CARE HOME", "ABBEYFIELD NORTH", "ACTION FOR CHILDREN SERVICES LTD"],
-    datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 90]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40]
-        }
-    ]
+
+var myLineChart = new Chart(ctx).Bar(data);
+
+
+ vendorLabels = [];
+ vendorData = [];
+ {% for vendor in vendors.byCost %}
+ vendorLabels.push("{{vendor.name}}".split(' ')[0]);
+ vendorData.push({{vendor.value}});
+ {% endfor %}
+
+ctx = document.getElementById("top-vendors-cost-chart").getContext("2d");
+
+data = {
+   labels: vendorLabels,
+   datasets: [
+       {
+           label: "Vendors",
+           fillColor: getRandomColor(),
+           data: vendorData
+       }
+   ]
 };
 
-var myRadarChart = new Chart(ctx).Radar(data);
+var vendorCostChart = new Chart(ctx).Bar(data);
 
 /**
  * Generates a random colour for charting purposes

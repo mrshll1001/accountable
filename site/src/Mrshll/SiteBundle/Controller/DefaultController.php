@@ -39,8 +39,10 @@ class DefaultController extends Controller
     // Get the data for display
     $spendData = $helper->spendData($records);
     $serviceMap = $helper->serviceMap($records);
+    $n = 5;
+    $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
 
-     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumbria County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap));
+     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumberland County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
    }
 
 
