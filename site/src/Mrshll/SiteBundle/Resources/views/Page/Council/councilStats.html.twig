@@ -11,14 +11,38 @@
   <div class="row">
     {# Comparisons panel(s) #}
     <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <p>Data comparisons go here</p>
-          {% for vendor in vendors.byFrequency %}
-            <p>{{vendor.name}} | {{vendor.value}}</p>
-          {% endfor %}
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>Data comparisons go here</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Missing or Redacted</h3>
+            </div>
+            <div class="panel-body">
+              <p>If a record has information missing or redacted we tag it and list it here in order to highlight it. Information that is missing could simply
+                have been misentered, and redactions could have been implemented to protect individual privacy. The alternative is that our code
+                doesn't work... which simply isn't the case ;-).
+              </p>
+
+              <p>
+                Here we provide all information regarding an offending record so that they can be chased up manually.
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     </div>
 
     {# Column of various bits of data (this is where the charts live) #}
@@ -177,27 +201,9 @@
 
 <script type="text/javascript">
  var ctx = document.getElementById("test-doughnut").getContext("2d");
- var data = [
-    {
-        value: 300,
-        color:getRandomColor(),
-        label: "Adult Social Care"
-    },
-    {
-        value: 150,
-        color: getRandomColor(),
-        highlight: "#5AD3D1",
-        label: "Regional Growth Fund"
-    },
-    {
-        value: 100,
-        color: getRandomColor(),
-        highlight: "#FFC870",
-        label: "Children's and Educational Services"
-    }
-];
 
-var newData = [ {% for item in servicemap %} {value:{{item.value}}, color:getRandomColor(), label:"{{item.name}}" }, {% endfor %} ];
+
+var newData = [ {% for item in servicemap %} {value:{{item.value}}, color:getRandomColor(), label:"{{item.name|raw}}" }, {% endfor %} ];
 
 
  var chart = new Chart(ctx).Pie(newData);

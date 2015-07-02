@@ -42,6 +42,7 @@ class DefaultController extends Controller
     $n = 5;
     $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
 
+    var_dump($helper->missingAndRedacted($records));
      return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumberland County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
    }
 
@@ -60,7 +61,9 @@ class DefaultController extends Controller
       $n = 5;
       $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
 
-       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Newcastle City Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
+      var_dump($helper->missingAndRedacted($records));
+
+      return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Newcastle City Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
     }
 
 
