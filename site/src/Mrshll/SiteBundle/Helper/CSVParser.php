@@ -12,6 +12,7 @@
    private $em;
 
    private $northumbriaCode = 'NORTHUMBRIA';
+   private $newcastleCode = 'NEWCASTLE';
 
 
 
