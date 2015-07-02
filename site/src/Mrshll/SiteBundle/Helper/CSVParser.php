@@ -20,8 +20,9 @@
    {
      $this->em = $em;
    }
+
    /**
-    * Retrieves all the Northumbria CSVs
+    * Retrieves all the Northumbria CSVs and stores them in the database.
     *
     */
     public function getNorthumbriaData()
@@ -46,14 +47,43 @@
           // Next, since we can't pass it out (lack of memory I think)
           // We instead pass it to Doctrine to keep a hold of
           $this->storeFixedData($data, $this->northumbriaCode);
-
         }
-
       }
 
+      // Return something in case we're being called via AJAX and we need a notification
       return count($data).' records have been stored successfully';
     }
 
+    /**
+     * Retrieves all of the NCL CSV files and stores them in the database
+     *
+     */
+     public function getNewcastleData()
+     {
+       // Get the folder where the CSV files are stored
+       $dir = __DIR__.'/../../../../web/csv/newcastle/';
+       $files = scandir($dir);
+
+       // Iterate over each directory and parse the content, ignoring system files
+       foreach($files as $file)
+       {
+         if($file !== '.' && $file !== '..' && $file !== '.DS_Store')
+         {
+           // Parse the csv using a newcastle csv parse
+           $data = $this->parseNewcastleCSV($dir.$file);
+
+          //  var_dump(array_keys($data[0]));
+          // var_dump($data[0]);
+
+          // Fix the data so we can actually use it
+          $data = $this->fixNewcastleData($data);
+          // var_dump($data[9]);
+
+          // Store the data in the database
+          $this->storeFixedData($data, $this->newcastleCode);
+         }
+       }
+     }
 
     /**
      * Stores Parsed (and fixed) data
@@ -106,6 +136,32 @@
 
      }
 
+     /**
+      * Fixes Parsed Newcastle Data
+      */
+      private function fixNewcastleData($data)
+      {
+        $fixedData = array();
+
+        // Iterate over the data array, convert all the keys to our common format, encode to UTF8 where necessary and trim
+        foreach($data as $item)
+        {
+          $fixedItem = array();
+          $fixedItem['vendor'] = utf8_encode(trim($item['Supplier Name']));
+          $fixedItem['value'] = floatval(str_replace(',','',$item['Total']));
+          $fixedItem['service'] = utf8_encode(trim($item['Directorate']));
+          $fixedItem['description'] = utf8_encode(trim($item['Group Description']));
+          $fixedItem['reference'] = trim($item['Internal Ref']);
+
+          // Push it to the fixed data array
+          array_push($fixedData, $fixedItem);
+
+
+        }
+        return $fixedData;
+      }
+
+
     /**
      * Parses a single Northumbria CSV file, returns the array without modification
      */
@@ -139,6 +195,35 @@
       return $mappedData;
 
     }
+
+    /**
+     * Parses a single Newcastle CSV file, returns the array without modification
+     */
+     private function parseNewcastleCSV($csv)
+     {
+       // Connect to file and retrieve data
+       $data = array_map('str_getcsv', file($csv));
+
+       // Get the headers and remove the guff; including headers as we have them stored now
+       $headers = $data[2];
+       unset($data[0]);
+       unset($data[1]);
+       unset($data[2]);
+
+       // Build a mapped data array with the headers as a key
+       $mappedData = array();
+       foreach($data as $item)
+       {
+         $record = array(); // New array to hold value for this record
+         for($i = 0; $i<count($item); $i++)
+         {
+           $record[$headers[$i]] = $item[$i]; // Allocate the contents of item keys in the new record
+         }
+         array_push($mappedData, $record); // Complete and push the new lovely data to the new array
+       }
+
+       return $mappedData;
+     }
 
 
  }
