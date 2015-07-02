@@ -33,7 +33,7 @@ class DefaultController extends Controller
    public function viewNorthumbriaAction()
    {
     //  $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
-    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findAll();
+    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NORTHUMBRIA');
     $helper = new RecordHelper();
 
     // Get the data for display
@@ -52,9 +52,9 @@ class DefaultController extends Controller
     */
     public function testAction()
     {
-      // // $parser = new NorthumbriaCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
-      // $parser = new CSVParser($this->getDoctrine()->getManager());
-      // $parser->getNorthumbriaData();
+      // $parser = new NorthumbriaCSVParser('http://www.northumberland.gov.uk/idoc.ashx?docid=481680e7-8ca1-4bc1-a9f9-c31527163455&version=-1');
+      $parser = new CSVParser($this->getDoctrine()->getManager());
+      $parser->getNorthumbriaData();
       return $this->render('MrshllSiteBundle:Page:test.html.twig', array());
     }
 

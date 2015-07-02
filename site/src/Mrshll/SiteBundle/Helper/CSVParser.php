@@ -51,7 +51,7 @@
 
       }
 
-      return;
+      return count($data).' records have been stored successfully';
     }
 
 
@@ -72,7 +72,7 @@
         $record->setVendor($item['vendor']);
         $record->setValue($item['value']);
         $record->setService($item['service']);
-        // $record->setDescription($item['description']);
+        $record->setDescription($item['description']);
         $record->setReference($item['reference']);
 
         // Persist that mother
@@ -89,15 +89,15 @@
      {
        $fixedData = array();
 
-       // Iterate over the data array, and convert all the keys to shit we can understand
+       // Iterate over the data array, and convert all the keys to stuff we can understand, encode to UTF8 so the database is OK, and trim whitespace to avoid problems elsewhere
        foreach($data as $item)
        {
          $fixedItem = array();
-         $fixedItem['vendor'] = utf8_encode($item['Vendor Name']);
+         $fixedItem['vendor'] = utf8_encode(trim($item['Vendor Name']));
          $fixedItem['value'] = floatval(str_replace(',', '', $item['Amount Exc']));
-         $fixedItem['service'] = $item['Service Responsible for Spend'];
-        //  $fixedItem['description'] = $item['Subjective'];
-         $fixedItem['reference'] = $item['Invoice'];
+         $fixedItem['service'] = trim($item['Service Responsible for Spend']);
+         $fixedItem['description'] = utf8_encode(trim($item['Subjective']));
+         $fixedItem['reference'] = trim($item['Invoice']);
 
          array_push($fixedData, $fixedItem);
        }

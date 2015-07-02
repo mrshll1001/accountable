@@ -59,7 +59,7 @@ class CouncilRecord
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=20)
      */
      private $description;
 
@@ -187,28 +187,5 @@ class CouncilRecord
     public function getCouncilcode()
     {
         return $this->councilcode;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return CouncilRecord
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 }
