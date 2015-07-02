@@ -34,8 +34,34 @@
               </p>
 
               <p>
-                Here we provide all information regarding an offending record so that they can be chased up manually.
+                Here we simply note records without information associated with them.
               </p>
+
+              <a role="button" data-toggle="collapse" href="#offenders-table">Expand / Collapse</a>
+
+              <table class="table table-hover collapse" id="offenders-table">
+                <thead>
+                  <tr>
+                    <th>Vendor</th>
+                    <th>Value</th>
+                    <th>Service</th>
+                    <th>Reference</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for record in offenders %}
+                    <tr>
+                      <td>{{record.vendor}}</td>
+                      <td>£{{record.value|number_format(2, '.', ',')}}</td>
+                      <td>{{record.service}}</td>
+                      <td>{{record.reference}}</td>
+                      <td>{{record.description}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+
+              </table>
 
             </div>
           </div>
