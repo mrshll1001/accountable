@@ -4,8 +4,12 @@ council_list:
 
 
 council_north:
-  path: /view/northumbria
+  path: /northumberland
   defaults: { _controller: MrshllSiteBundle:Default:viewNorthumbria }
+
+council_ncl:
+  path: /newcastle
+  defaults: { _controller:MrshllSiteBundle:Default:viewNewcastle }
 
 council_create:
     path: /create

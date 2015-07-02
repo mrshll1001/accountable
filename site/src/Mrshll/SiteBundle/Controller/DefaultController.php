@@ -45,6 +45,24 @@ class DefaultController extends Controller
      return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumberland County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
    }
 
+   /**
+    * View Newcastle Council
+    *
+    */
+    public function viewNewcastleAction()
+    {
+      $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NEWCASTLE');
+      $helper = new RecordHelper();
+
+      // Get the data for display
+      $spendData = $helper->spendData($records);
+      $serviceMap = $helper->serviceMap($records);
+      $n = 5;
+      $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
+
+       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Newcastle City Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors));
+    }
+
 
 
     /**
