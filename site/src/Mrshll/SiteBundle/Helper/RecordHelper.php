@@ -152,8 +152,8 @@ class RecordHelper
 
 
   /**
-  * Finds and returns a subset of the records based on whether any information is missing
-  */
+   * Finds and returns a subset of the records based on whether any information is missing
+   */
   public function missingAndRedacted()
   {
     // Create an array for the offending records
@@ -172,6 +172,38 @@ class RecordHelper
 
     return $offenders;
   }
+
+  /**
+   * Compares the spending of two record sets based on the percentage difference. Uses the formula for percentage increase, will return a negative number if it's a percentage decrease.
+   */
+   public function compareRecords($otherRecords)
+   {
+     // Total both this set of records and the other set
+     $thisTotal = $this->total($this->records);
+     $otherTotal = $this->total($otherRecords);
+
+     // Calculate the percentage increase
+     $percentageIncrease = (($thisTotal - $otherTotal) / $thisTotal) * 100;
+     
+     return $percentageIncrease;
+   }
+
+  // ================================================================================================================
+  //  Private Helper Functions
+  // ================================================================================================================
+
+  /**
+   * Returns the total value spent on a group of records
+   */
+   private function totalValue($records)
+   {
+     $total = 0;
+     foreach($records as $record)
+     {
+       $total = $total + $record->getValue();
+     }
+     return $total;
+   }
 
   /**
    * returns a true or false value based on whether a record has a missing field
