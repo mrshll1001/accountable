@@ -63,6 +63,24 @@ class RecordHelper
   }
 
   /**
+   * Returns a list of services that has had money spent on them
+   */
+   public function serviceList()
+   {
+     $list = array();
+
+     foreach($this->records as $record)
+     {
+       if(!in_array($record->getService))
+       {
+         $list[] = $record->getService();
+       }
+     }
+
+     return $list;
+   }
+
+  /**
   * Returns a map of totals spent on/by a given service, ordered by spend
   */
   public function serviceMap()
