@@ -11,6 +11,10 @@ council_ncl:
   path: /newcastle
   defaults: { _controller:MrshllSiteBundle:Default:viewNewcastle }
 
+council_stats:
+    path: /view/{councilcode}
+    defaults: { _controller:MrshllSiteBundle:Default:viewOneCouncil }
+
 council_create:
     path: /create
     defaults: { _controller: MrshllSiteBundle:Council:create }

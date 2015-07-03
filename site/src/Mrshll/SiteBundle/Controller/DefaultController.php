@@ -66,6 +66,26 @@ class DefaultController extends Controller
       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Newcastle City Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
     }
 
+    /**
+     * View a council based off of councilcode
+     */
+     public function viewOneCouncilAction($councilcode)
+     {
+       $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode($councilcode);
+       $helper = new RecordHelper($records);
+
+       // Get the data for display
+       $spendData = $helper->spendData();
+       $serviceMap = $helper->serviceMap();
+       $n = 5;
+       $offenders = $helper->missingAndRedacted();
+       $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
+
+
+
+       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Council Name", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
+     }
+
 
 
     /**
