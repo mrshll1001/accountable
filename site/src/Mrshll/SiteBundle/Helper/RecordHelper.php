@@ -12,22 +12,36 @@ use Mrshll\SiteBundle\Entity\CouncilRecord;
 
 class RecordHelper
 {
+
+  /**
+   * Array of records that calculations are performed on
+   */
+  private $records;
+
+  /**
+   * Constructor, constructed with an array of records
+   */
+  public function __construct($records)
+  {
+    $this->records = $records;
+  }
+
   /**
   * Calculates the average spend of a set of records
   */
-  public function spendData($records)
+  public function spendData()
   {
     // Values array for returning data
     $values = array();
 
     // Count values and initialise total
-    $values['count'] = count($records);
+    $values['count'] = count($this->records);
     $values['total'] = 0;
     $values['smallest'] = PHP_INT_MAX;
     $values['largest'] = 0;
 
     // Calculate the total, largest, and smallest spend
-    foreach($records as $record)
+    foreach($this->records as $record)
     {
       $values['total'] = $values['total'] + $record->getValue();
 
@@ -51,11 +65,11 @@ class RecordHelper
   /**
   * Returns a map of totals spent on/by a given service, ordered by spend
   */
-  public function serviceMap($records)
+  public function serviceMap()
   {
     // Build the mappings, if the key exists update the total, else create the key
     $mappings = array();
-    foreach($records as $record)
+    foreach($this->records as $record)
     {
 
       if(array_key_exists(trim($record->getService()), $mappings))
@@ -82,11 +96,11 @@ class RecordHelper
   /**
   * Returns a map of the top n used vendors, by cost
   */
-  public function topVendorsByCost($records, $n)
+  public function topVendorsByCost($n)
   {
     // Set up the mappings
     $mappings = array();
-    foreach($records as $record)
+    foreach($this->records as $record)
     {
       if(array_key_exists(trim($record->getVendor()), $mappings))
       {
@@ -110,11 +124,11 @@ class RecordHelper
   /**
   * Returns a map of the top n used vendors, by frequency
   */
-  public function topVendorsByFrequency($records, $n)
+  public function topVendorsByFrequency($n)
   {
     // Set up the mappings
     $mappings = array();
-    foreach ($records as $record)
+    foreach ($this->records as $record)
     {
       // Check the array key exists
       if(array_key_exists(trim($record->getVendor()), $mappings))
@@ -140,13 +154,13 @@ class RecordHelper
   /**
   * Finds and returns a subset of the records based on whether any information is missing
   */
-  public function missingAndRedacted($records)
+  public function missingAndRedacted()
   {
     // Create an array for the offending records
     $offenders = array();
 
     // Loop over the records, and find any that have blank fields or contain redacted information
-    foreach($records as $record)
+    foreach($this->records as $record)
     {
       // First check for missing information
       if($this->hasMissing($record) || $this->hasRedacted($record))

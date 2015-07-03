@@ -34,14 +34,14 @@ class DefaultController extends Controller
    {
     //  $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
     $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NORTHUMBRIA');
-    $helper = new RecordHelper();
+    $helper = new RecordHelper($records);
 
     // Get the data for display
-    $spendData = $helper->spendData($records);
-    $serviceMap = $helper->serviceMap($records);
+    $spendData = $helper->spendData();
+    $serviceMap = $helper->serviceMap();
     $n = 5;
-    $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
-    $offenders = $helper->missingAndRedacted($records);
+    $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
+    $offenders = $helper->missingAndRedacted();
      return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumberland County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
    }
 
@@ -52,14 +52,14 @@ class DefaultController extends Controller
     public function viewNewcastleAction()
     {
       $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NEWCASTLE');
-      $helper = new RecordHelper();
+      $helper = new RecordHelper($records);
 
       // Get the data for display
-      $spendData = $helper->spendData($records);
-      $serviceMap = $helper->serviceMap($records);
+      $spendData = $helper->spendData();
+      $serviceMap = $helper->serviceMap();
       $n = 5;
-      $offenders = $helper->missingAndRedacted($records);
-      $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($records, $n), 'byFrequency'=>$helper->topVendorsByFrequency($records, $n)];
+      $offenders = $helper->missingAndRedacted();
+      $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
 
 
 
