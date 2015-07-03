@@ -11,8 +11,8 @@
  {
    private $em;
 
-   private $northumbriaCode = 'NORTHUMBRIA';
-   private $newcastleCode = 'NEWCASTLE';
+   private $northumbriaCode = 'northumberland';
+   private $newcastleCode = 'newcastle';
 
 
 
