@@ -179,12 +179,12 @@ class RecordHelper
    public function compareRecords($otherRecords)
    {
      // Total both this set of records and the other set
-     $thisTotal = $this->total($this->records);
-     $otherTotal = $this->total($otherRecords);
+     $thisTotal = $this->totalValue($this->records);
+     $otherTotal = $this->totalValue($otherRecords);
 
      // Calculate the percentage increase
      $percentageIncrease = (($thisTotal - $otherTotal) / $thisTotal) * 100;
-     
+
      return $percentageIncrease;
    }
 
