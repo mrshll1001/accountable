@@ -15,7 +15,33 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-body">
-              <p>Data comparisons go here</p>
+              <p>Compare {{name}}'s spending with that of other Councils. First, select the council from the dropdown here:</p>
+
+              <select id="council-select" class="form-control">
+                <option value="newcastle">Newcastle</option>
+              </select>
+
+              <p>Next, select which two services you'd like to compare. We can't do this automatically, unfortunately, because Councils currently classify services
+                differently. You can select two that appear similar, and compare the spending.
+              </p>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <select id="serviceOneSelect" class="form-control">
+                    {% for service in serviceList %}
+                    <option value="{{service}}">{{service}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <select id="serviceTwoSelect" class="form-control">
+                    <option>TODO</option>
+                  </select>
+                </div>
+
+              </div>
+
             </div>
           </div>
         </div>

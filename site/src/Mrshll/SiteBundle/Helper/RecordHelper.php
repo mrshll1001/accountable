@@ -71,7 +71,7 @@ class RecordHelper
 
      foreach($this->records as $record)
      {
-       if(!in_array($record->getService))
+       if(!in_array($record->getService(), $list))
        {
          $list[] = $record->getService();
        }
