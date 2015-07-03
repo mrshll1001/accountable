@@ -25,7 +25,7 @@
     * Retrieves all the Northumbria CSVs and stores them in the database.
     *
     */
-    public function getNorthumbriaData()
+    public function getNorthumberlandData()
     {
       // Get the folder where the CSVs are stored
       $dir = __DIR__.'/../../../../web/csv/northumbria/';
