@@ -3,6 +3,7 @@
 namespace Mrshll\SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Mrshll\SiteBundle\Helper\NorthumbriaCSVParser;
 use Mrshll\SiteBundle\Entity\Record;
 use Mrshll\SiteBundle\Helper\CSVParser;
@@ -24,14 +25,14 @@ class ScraperController extends Controller
       {
         case 'northumberland':
           $parser->getNorthumberlandData();
-          return 'Northumberland Data parsed';
+          return new Response('Northumberland Data parsed');
           break;
-        case: 'newcastle':
+        case 'newcastle':
           $parser->getNewcastleData();
-          return 'Newcastle Data parsed';
+          return new Response('Newcastle Data parsed');
           break;
         default:
-          return 'Invalid Council Code';
+          return new Response('Invalid Council Code');
           break;
       }
     }

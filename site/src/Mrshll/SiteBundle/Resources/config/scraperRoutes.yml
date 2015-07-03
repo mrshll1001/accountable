@@ -1,4 +1,4 @@
-parse_one_northumbria:
+get_council_data:
   path: /getdata/{councilcode}
-  defaults: { _controller: MrshllSiteBundle:Scraper:parseOneNorthumbria }
-  methods: [POST]
+  defaults: { _controller: MrshllSiteBundle:Scraper:parseCouncil }
+  methods: [GET]

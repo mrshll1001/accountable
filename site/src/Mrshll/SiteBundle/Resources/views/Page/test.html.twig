@@ -5,7 +5,7 @@
 
 
 {% block content %}
-  <div class="container">
+<div class="container">
 
 
 
@@ -19,46 +19,48 @@
 
     <div class="row">
       <div class="col-md-3">
-        <form>
-          <input type="text" class="form-control" id="councilName" placeholder="Council's Name" />
-          <button type="button" id="createCouncilBtn" class="btn btn-primary">Create</button>
-        </form>
+        <button class="btn btn-primary" id="newcastlebtn">Get Newcastle Data</button>
       </div>
-    </div>
+      <div class="col-md-3">
+        <button class="btn btn-primary" id="northumberlandbtn">Get Northumberland Data</button>
+      </div>
+  </div>
 
 
-  
-
-  </div> <!-- End container -->
+</div> <!-- End container -->
 
 <script>
 
   /**
-   * Controller for the council creation form
+   * Controller for getting newcastle data
    */
-  $('#createCouncilBtn').click(function(e){
+   $('#newcastlebtn').click(function(e){
+     $.ajax({
+       url: "{{url('get_council_data', {'councilcode': 'newcastle'})}}",
+       success: function(response){
+         alert(response);
+       },
+       error: function(response){
+         alert(response.responseText);
+       }
+     });
+   });
 
-    var name = $('#councilName').val();
-    var data = JSON.stringify({name: name});
-
-    $.ajax({
-      url: '{{url('council_create')}}',
-      data: data,
-      method: 'POST',
-      content: 'application/JSON',
-      success: function(response){
-        alert(response);
-      },
-      error: function(response){
-        alert('There was an error completing the action');
-      }
+   /**
+    * Controller for getting newcastle data
+    */
+    $('#northumberlandbtn').click(function(e){
+      $.ajax({
+        url: "{{url('get_council_data', {'councilcode': 'northumberland'})}}",
+        success: function(response){
+          alert(response);
+        },
+        error: function(response){
+          alert(response.responseText);
+        }
+      });
     });
 
-    /**
-     * Controller for the council deleteAction
-     */
-
-  });
 </script>
 
 {% endblock content %}

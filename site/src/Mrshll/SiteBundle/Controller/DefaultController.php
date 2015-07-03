@@ -33,7 +33,7 @@ class DefaultController extends Controller
    public function viewNorthumbriaAction()
    {
     //  $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
-    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NORTHUMBRIA');
+    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('northumberland');
     $helper = new RecordHelper($records);
 
     // Get the data for display
