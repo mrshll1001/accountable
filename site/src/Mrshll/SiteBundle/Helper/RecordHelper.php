@@ -176,7 +176,7 @@ class RecordHelper
   /**
    * Compares the spending of two record sets based on the percentage difference. Uses the formula for percentage increase, will return a negative number if it's a percentage decrease.
    */
-   public function compareRecords($otherRecords)
+   public function percentageDifference($otherRecords)
    {
      // Total both this set of records and the other set
      $thisTotal = $this->totalValue($this->records);
