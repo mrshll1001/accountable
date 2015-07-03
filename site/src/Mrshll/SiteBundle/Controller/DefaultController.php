@@ -26,46 +26,6 @@ class DefaultController extends Controller
       return $this->render('MrshllSiteBundle:Page/Council:councillist.html.twig', array());
     }
 
-  /**
-   * View Northumbria Council
-   *
-   */
-   public function viewNorthumbriaAction()
-   {
-    //  $council = $this->getDoctrine()->getRepository('MrshllSiteBundle:Council')->findOneByName('Northumbria County Council');
-    $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('northumberland');
-    $helper = new RecordHelper($records);
-
-    // Get the data for display
-    $spendData = $helper->spendData();
-    $serviceMap = $helper->serviceMap();
-    $n = 5;
-    $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
-    $offenders = $helper->missingAndRedacted();
-     return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Northumberland County Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
-   }
-
-   /**
-    * View Newcastle Council
-    *
-    */
-    public function viewNewcastleAction()
-    {
-      $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode('NEWCASTLE');
-      $helper = new RecordHelper($records);
-
-      // Get the data for display
-      $spendData = $helper->spendData();
-      $serviceMap = $helper->serviceMap();
-      $n = 5;
-      $offenders = $helper->missingAndRedacted();
-      $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
-
-
-
-      return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Newcastle City Council", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
-    }
-
     /**
      * View a council based off of councilcode
      */
@@ -75,15 +35,14 @@ class DefaultController extends Controller
        $helper = new RecordHelper($records);
 
        // Get the data for display
+       $name = ucfirst($councilcode);
        $spendData = $helper->spendData();
        $serviceMap = $helper->serviceMap();
        $n = 5;
        $offenders = $helper->missingAndRedacted();
        $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
 
-
-
-       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>"Council Name", 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
+       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>$name, 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'offenders'=>$offenders));
      }
 
 

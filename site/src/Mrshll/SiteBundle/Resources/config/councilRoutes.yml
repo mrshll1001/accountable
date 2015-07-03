@@ -2,15 +2,6 @@ council_list:
   path: /
   defaults: { _controller: MrshllSiteBundle:Default:viewCouncils }
 
-
-council_north:
-  path: /northumberland
-  defaults: { _controller: MrshllSiteBundle:Default:viewNorthumbria }
-
-council_ncl:
-  path: /newcastle
-  defaults: { _controller:MrshllSiteBundle:Default:viewNewcastle }
-
 council_stats:
     path: /view/{councilcode}
     defaults: { _controller:MrshllSiteBundle:Default:viewOneCouncil }
