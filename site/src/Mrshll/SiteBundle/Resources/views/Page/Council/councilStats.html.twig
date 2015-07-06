@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container">
   <input type="hidden" id="council-name" value="{{name|lower}}" />
-  <h1 class="council-name">{{name}} Council <small>Based on {{spend.count}} records</small></h1>
+  <h1 class="council-name">{{name}} Council <small><button type="button" class="btn btn-link" id="record-info">Based on {{spend.count}} records</button></small></h1> 
 
   {# We put everything inside one row, with multiple sub-rows in the columns for the far panel. TO achieve the layout we want  #}
   <div class="row">

@@ -67,7 +67,18 @@ $('#council-select').change(function(e)
    }
  });
 
+/**
+ * Controller for the information button in the title. SHould show a modal with the content
+ */
+$('#record-info').click(function(e)
+{
 
+  var title = "Where do we get our information?";
+  var body = "We get our information from the council services. Silly billy";
+
+
+  showModal(title, body);
+});
 
 // ==================================================
 // Helper functions
