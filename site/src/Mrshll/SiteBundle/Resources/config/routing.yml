@@ -11,6 +11,10 @@ council_routes:
     resource: "@MrshllSiteBundle/Resources/config/councilRoutes.yml"
     prefix: /council
 
+record_routes:
+    resource: "@MrshllSiteBundle/Resources/config/recordRoutes.yml"
+    prefix: /record
+
 scraper_routes:
     resource: "@MrshllSiteBundle/Resources/config/scraperRoutes.yml"
     prefix: /scraper

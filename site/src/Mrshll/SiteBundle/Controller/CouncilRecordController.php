@@ -21,9 +21,9 @@ class CouncilRecordController extends Controller
        // Get a repository of the records
        $repo = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord');
 
-       // Find by Council and service
-       $recordsOne = $repo->findBy('councilcode'=>$data->councilOne, 'service'=>$data->serviceOne);
-       $recordsTwo = $rep->findBy('councilcode'=>$data->councilTwo, 'service'=>$data->serviceTwo);
+      //  // Find by Council and service
+      //  $recordsOne = $repo->findBy('councilcode'=>$data->councilOne, 'service'=>$data->serviceOne);
+      //  $recordsTwo = $repo->findBy('councilcode'=>$data->councilTwo, 'service'=>$data->serviceTwo);
 
        // Instantiate a RecordHelper to perform the calculations, get the percentage difference
        $helper = new RecordHelper($recordsOne);
@@ -32,5 +32,21 @@ class CouncilRecordController extends Controller
        return json_encode(array('difference'=>$difference));
 
      }
+
+     /**
+      * Retrieves a list of services provided by a council
+      */
+      public function getCouncilServicesAction($councilcode)
+      {
+        // Get the repo of the council's records
+        $records = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord')->findByCouncilcode($councilcode);
+
+        // Get a list of their provided services
+        $helper = new RecordHelper($records);
+        $serviceList = $helper->serviceList();
+
+        // Return the array
+        return $this->render('MrshllSiteBundle:Page/Council:serviceSelect.html.twig', array('serviceList'=>$serviceList));
+      }
 
 }

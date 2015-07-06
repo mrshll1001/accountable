@@ -18,8 +18,9 @@
               <p>Compare {{name}}'s spending with that of other Councils. First, select the council from the dropdown here:</p>
 
               <select id="council-select" class="form-control">
+                <option value="NULL">--Select Council--</option>
                 {% for council in councils %}
-                <option value="{{council|lower}}">{{council}}</option>
+                <option value="{{council|lower}}">{{council}} Council</option>
                 {% endfor %}
               </select>
 
@@ -252,6 +253,8 @@
 
 
 <script type="text/javascript" src="{{asset('/js/chart-js/Chart.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('/js/councilFunctions.js')}}"></script>
 
 <script type="text/javascript">
  var ctx = document.getElementById("test-doughnut").getContext("2d");
