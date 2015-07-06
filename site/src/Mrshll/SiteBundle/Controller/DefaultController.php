@@ -42,7 +42,15 @@ class DefaultController extends Controller
        $offenders = $helper->missingAndRedacted();
        $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
        $serviceList = $helper->serviceList();
-       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>$name, 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'serviceList'=>$serviceList, 'offenders'=>$offenders));
+
+       // Set up the council list
+       $councilList = array();
+       $councilList['northumberland'] = "Northumberland";
+       $councilList['newcastle'] = "Newcastle";
+       unset($councilList[$councilcode]);
+
+
+       return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>$name, 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'serviceList'=>$serviceList, 'offenders'=>$offenders, 'councils'=>$councilList));
      }
 
 

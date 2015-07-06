@@ -18,7 +18,9 @@
               <p>Compare {{name}}'s spending with that of other Councils. First, select the council from the dropdown here:</p>
 
               <select id="council-select" class="form-control">
-                <option value="newcastle">Newcastle</option>
+                {% for council in councils %}
+                <option value="{{council|lower}}">{{council}}</option>
+                {% endfor %}
               </select>
 
               <p>Next, select which two services you'd like to compare. We can't do this automatically, unfortunately, because Councils currently classify services
