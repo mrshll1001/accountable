@@ -5,5 +5,5 @@ record_services:
 
 record_compare:
   path: /compare
-  defaults: { _controller: MrshllSiteBundle:CouncilRecord:compareRecordsByServiceAction }
+  defaults: { _controller: MrshllSiteBundle:CouncilRecord:compareRecordsByService }
   methods: [POST]

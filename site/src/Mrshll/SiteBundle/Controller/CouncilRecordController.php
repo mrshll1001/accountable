@@ -22,14 +22,15 @@ class CouncilRecordController extends Controller
        $repo = $this->getDoctrine()->getRepository('MrshllSiteBundle:CouncilRecord');
 
       //  // Find by Council and service
-      //  $recordsOne = $repo->findBy('councilcode'=>$data->councilOne, 'service'=>$data->serviceOne);
-      //  $recordsTwo = $repo->findBy('councilcode'=>$data->councilTwo, 'service'=>$data->serviceTwo);
+       $recordsOne = $repo->findBy(['councilcode'=>$data->councilOne, 'service'=>$data->serviceOne]);
+       $recordsTwo = $repo->findBy(['councilcode'=>$data->councilTwo, 'service'=>$data->serviceTwo]);
 
        // Instantiate a RecordHelper to perform the calculations, get the percentage difference
        $helper = new RecordHelper($recordsOne);
        $difference = $helper->percentageDifference($recordsTwo);
+       $absolutePercent = abs($difference);
 
-       return json_encode(array('difference'=>$difference));
+       return $this->render('MrshllSiteBundle:Page/Council:comparisonPanel.html.twig', array('councilOne'=>$data->councilOne, 'councilTwo'=>$data->councilTwo, 'serviceOne'=>$data->serviceOne, 'serviceTwo'=>$data->serviceTwo ,'difference'=>$difference, 'absolutePercent'=>$absolutePercent));
 
      }
 

@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container">
-
+  <input type="hidden" id="council-name" value="{{name|lower}}" />
   <h1 class="council-name">{{name}} Council <small>Based on {{spend.count}} records</small></h1>
 
   {# We put everything inside one row, with multiple sub-rows in the columns for the far panel. TO achieve the layout we want  #}
@@ -22,15 +22,15 @@
                 {% for council in councils %}
                 <option value="{{council|lower}}">{{council}} Council</option>
                 {% endfor %}
-              </select>
+              </select> </br>
 
               <p>Next, select which two services you'd like to compare. We can't do this automatically, unfortunately, because Councils currently classify services
                 differently. You can select two that appear similar, and compare the spending.
               </p>
-
+            </br>
               <div class="row">
                 <div class="col-md-6">
-                  <select id="serviceOneSelect" class="form-control">
+                  <select id="serviceOneSelect" class="form-control service-selector">
                     {% for service in serviceList %}
                     <option value="{{service}}">{{service}}</option>
                     {% endfor %}
@@ -38,14 +38,17 @@
                 </div>
 
                 <div class="col-md-6">
-                  <select id="serviceTwoSelect" class="form-control">
-                    <option>--Select Council Above--</option>
+                  <select id="serviceTwoSelect" class="form-control service-selector">
+                    <option value="NULL">--Select Council Above--</option>
                   </select>
                 </div>
 
               </div>
 
             </div>
+
+            <div id="comparison-container"></div>
+
           </div>
         </div>
       </div>

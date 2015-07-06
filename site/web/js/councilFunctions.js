@@ -33,11 +33,37 @@ $('#council-select').change(function(e)
 /**
  * Controller for selecting another service from the dropdown
  */
- $('#serviceTwoSelect').change(function(e)
+ $('.service-selector').change(function(e)
  {
-   if($(this).val() != "NULL")
+   // Get the values of both service selectors
+   var serviceOne = $('#serviceOneSelect').val();
+   var serviceTwo = $('#serviceTwoSelect').val();
+
+   // Check if either of them are null
+   if(serviceOne != "NULL" && serviceTwo != "NULL")
    {
-     alert("Not a null service");
+     // Get the council codes for the call
+     var councilOne = $('#council-name').val();
+     var councilTwo = $('#council-select').val();
+
+     // Make the JSON data for the AJAX call.
+     var data = JSON.stringify({councilOne: councilOne, councilTwo: councilTwo, serviceOne: serviceOne, serviceTwo: serviceTwo});
+
+     // Form the AJAX Request
+     $.ajax({
+       url: '/record/compare',
+       method: 'POST',
+       data: data,
+       type: 'application/JSON',
+       success: function(response)
+       {
+         refreshComparison(response);
+       },
+       error: function(response)
+       {
+         alert(response.responseText);
+       }
+     });
    }
  });
 
@@ -54,4 +80,13 @@ function refreshServices(html)
 {
   // Get the services selector and set its inner html
   $('#serviceTwoSelect').html(html);
+}
+
+/**
+ * refresh the inner html of the comparison-container
+ */
+function refreshComparison(html)
+{
+  // get the container and refresh the html
+  $('#comparison-container').html(html);
 }
