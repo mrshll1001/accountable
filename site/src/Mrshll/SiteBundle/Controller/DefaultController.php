@@ -38,7 +38,7 @@ class DefaultController extends Controller
        $name = ucfirst($councilcode);
        $spendData = $helper->spendData();
        $serviceMap = $helper->serviceMap();
-       $n = 5;
+       $n = 10;
        $offenders = $helper->missingAndRedacted();
        $vendors = ['n'=>$n, 'byCost'=>$helper->topVendorsByCost($n), 'byFrequency'=>$helper->topVendorsByFrequency($n)];
        $serviceList = $helper->serviceList();
