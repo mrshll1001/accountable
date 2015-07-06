@@ -28,7 +28,7 @@ class CouncilRecordController extends Controller
        // Instantiate a RecordHelper to perform the calculations, get the percentage difference
        $helper = new RecordHelper($recordsOne);
        $difference = $helper->percentageDifference($recordsTwo);
-       $absolutePercent = abs($difference);
+       $absolutePercent = abs($difference); // We use this so that we're not showing a -percentage difference
 
        return $this->render('MrshllSiteBundle:Page/Council:comparisonPanel.html.twig', array('councilOne'=>$data->councilOne, 'councilTwo'=>$data->councilTwo, 'serviceOne'=>$data->serviceOne, 'serviceTwo'=>$data->serviceTwo ,'difference'=>$difference, 'absolutePercent'=>$absolutePercent));
 
