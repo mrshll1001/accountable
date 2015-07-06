@@ -1,4 +1,8 @@
 
+// ==================================================
+// Event controllers
+// ==================================================
+
 /**
  * Controller for selecting another council on change
  */
@@ -26,11 +30,26 @@ $('#council-select').change(function(e)
   }
 });
 
+/**
+ * Controller for selecting another service from the dropdown
+ */
+ $('#serviceTwoSelect').change(function(e)
+ {
+   if($(this).val() != "NULL")
+   {
+     alert("Not a null service");
+   }
+ });
+
 
 
 // ==================================================
-// Helper function
+// Helper functions
 // ==================================================
+
+/**
+ * Refresh the inner html of the serviceTwoList
+ */
 function refreshServices(html)
 {
   // Get the services selector and set its inner html
