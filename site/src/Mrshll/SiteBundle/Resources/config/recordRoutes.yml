@@ -2,3 +2,8 @@ record_services:
   path: /services/{councilcode}
   defaults: { _controller: MrshllSiteBundle:CouncilRecord:getCouncilServices }
   methods: [GET]
+
+record_compare:
+  path: /compare
+  defaults: { _controller: MrshllSiteBundle:CouncilRecord:compareRecordsByServiceAction }
+  methods: [POST]
