@@ -75,7 +75,7 @@ $('#record-info').click(function(e)
 
  // Make a GET request to get the disclaimer to act as a modal body
  $.ajax({
-   url: "/record/disclaimer",
+   url: Routing.generate('record_disclaimer',null ,true),
    success: function(response)
    {
      showModal("Where do we get our information?", response);
@@ -85,6 +85,8 @@ $('#record-info').click(function(e)
      alert("There has been an error");
    }
  });
+
+
 });
 
 // ==================================================

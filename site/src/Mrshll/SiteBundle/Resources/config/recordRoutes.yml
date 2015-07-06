@@ -1,6 +1,8 @@
 record_disclaimer:
   path: /disclaimer
   defaults: { _controller: MrshllSiteBundle:CouncilRecord:getDisclaimer }
+  options:
+      expose: true
 
 record_services:
   path: /services/{councilcode}
