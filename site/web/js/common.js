@@ -7,7 +7,7 @@ function showModal(title, body)
   $('#modal-title').text(title);
 
   // Set the modal's body
-  $('#modal-body').text(body);
+  $('#modal-body').html(body);
 
   // Show the modal
   $('#the-modal').modal('show');

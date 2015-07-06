@@ -1,3 +1,7 @@
+record_disclaimer:
+  path: /disclaimer
+  defaults: { _controller: MrshllSiteBundle:CouncilRecord:getDisclaimer }
+
 record_services:
   path: /services/{councilcode}
   defaults: { _controller: MrshllSiteBundle:CouncilRecord:getCouncilServices }

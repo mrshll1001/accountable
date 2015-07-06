@@ -10,6 +10,14 @@ class CouncilRecordController extends Controller
 {
 
     /**
+     * Returns a disclaimer in html
+     */
+     public function getDisclaimerAction()
+     {
+       return $this->render('MrshllSiteBundle:Page/Council:disclaimer.html.twig', array());
+     }
+
+    /**
      * Compares and gets the percentage difference between two sets of records by the council code and the service
      */
      public function compareRecordsByServiceAction()

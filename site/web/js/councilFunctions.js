@@ -73,11 +73,18 @@ $('#council-select').change(function(e)
 $('#record-info').click(function(e)
 {
 
-  var title = "Where do we get our information?";
-  var body = "We get our information from the council services. Silly billy";
-
-
-  showModal(title, body);
+ // Make a GET request to get the disclaimer to act as a modal body
+ $.ajax({
+   url: "/record/disclaimer",
+   success: function(response)
+   {
+     showModal("Where do we get our information?", response);
+   },
+   error: function(response)
+   {
+     alert("There has been an error");
+   }
+ });
 });
 
 // ==================================================
