@@ -53,6 +53,14 @@ class DefaultController extends Controller
        return $this->render('MrshllSiteBundle:Page/Council:councilStats.html.twig', array('name'=>$name, 'spend'=>$spendData, 'servicemap'=>$serviceMap, 'vendors'=>$vendors, 'serviceList'=>$serviceList, 'offenders'=>$offenders, 'councils'=>$councilList));
      }
 
+     /**
+      * View the Non-Profit Organisation page
+      */
+      public function viewNonProfitAction()
+      {
+        return $this->render('MrshllSiteBundle:Page/NPO:npo.html.twig', array());
+      }
+
 
 
     /**

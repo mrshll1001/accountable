@@ -1,0 +1,4 @@
+npo_index:
+    path: /
+    defaults: { _controller: MrshllSiteBundle:Default:viewNonProfit }
+    methods: [GET]
