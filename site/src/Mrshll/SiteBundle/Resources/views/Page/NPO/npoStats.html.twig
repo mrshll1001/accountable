@@ -58,6 +58,10 @@
             </div>
 
             <div class="panel-body list-group-item">
+              In 2014, <b>12% of spending</b> by Age Concern Newcastle was on generating income and running the charity, this amount was also <b>15.46% of its income</b>.
+            </div>
+
+            <div class="panel-body list-group-item">
               In 2014, Age Concern Newcastle <b>earned £0.04m</b> via activities such as running shops or hosting events. It <b>spent £0.05m</b> in costs related to these activities. This totals as a <b>£0.01m loss</b> for the organisation.
             </div>
 
@@ -86,7 +90,7 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Income and Spending</h3>
+              <h3 class="panel-title">Income and Spending History</h3>
             </div>
 
             <div class="panel-body">
@@ -140,6 +144,70 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Spending Breakdown 2014</h3>
+            </div>
+
+            <div class="panel-body">
+              <canvas id="spendingChart"></canvas>
+              <a role="button" data-toggle="collapse" href="#spending-table">Expand / Collapse</a>
+              <table class="table table-hover collapse" id="spending-table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>% of total spend</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>Generating Voluntary Income</td>
+                    <td>£0.07m</td>
+                    <td>1.98%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Trading to Raise Funds</td>
+                    <td>£0.05</td>
+                    <td>1.41%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Investment management</td>
+                    <td>£0.00m</td>
+                    <td>0%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Charitable Activities</td>
+                    <td>£3.09</td>
+                    <td>87.53%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Governance</td>
+                    <td>£0.03</td>
+                    <td>0.84%</td>
+                  </tr>
+
+                  <tr>
+                    <td>Other</td>
+                    <td>£0.29</td>
+                    <td>8.21%</td>
+                  </tr>
+                </tbody>
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div> {# End sidebar #}
 
   </div>
@@ -175,6 +243,58 @@
 };
 
   var incomeChart = new Chart(ctx).Bar(data);
+
+  // Reset the context and data variables and draw a bar chart
+  ctx = document.getElementById("spendingChart").getContext("2d");
+
+  data = [
+    {
+      value: 0.07,
+      color: getRandomColor(),
+      label: "Generating Voluntary Income"
+    },
+    {
+      value: 0.05,
+      color: getRandomColor(),
+      label: "Trading to Raise Funds"
+    },
+    {
+      value: 0.00,
+      color: getRandomColor(),
+      label: "Investment management"
+    },
+    {
+      value: 3.09,
+      color: getRandomColor(),
+      label: "Charitable Activities"
+    },
+    {
+      value: 0.03,
+      color: getRandomColor(),
+      label: "Governance"
+    },
+    {
+      value: 0.29,
+      color: getRandomColor(),
+      label: "Other"
+    }
+  ];
+
+  var spendingChart = new Chart(ctx).Doughnut(data);
+
+
+  /**
+   * Generates a random colour for charting purposes
+   */
+  function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+  }
+
 </script>
 
 {% endblock content %}
