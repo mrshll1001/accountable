@@ -61,7 +61,13 @@ class DefaultController extends Controller
         return $this->render('MrshllSiteBundle:Page/NPO:npo.html.twig', array());
       }
 
-
+      /**
+       * View a specific non Profit Page
+       */
+       public function viewOneCharityAction($charitycode)
+       {
+         return $this->render('MrshllSiteBundle:Page/NPO:npoStats.html.twig');
+       }
 
     /**
     * Test Action. Not to remain in the final Bundle

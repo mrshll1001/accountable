@@ -2,3 +2,7 @@ npo_index:
     path: /
     defaults: { _controller: MrshllSiteBundle:Default:viewNonProfit }
     methods: [GET]
+
+npo_stats:
+    path: /view/{charitycode}
+    defaults: { _controller: MrshllSiteBundle:Default:viewOneCharity }
