@@ -40,7 +40,7 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Quick facts</h3>
+              <h3 class="panel-title">Quick Numbers</h3>
 
             </div>
             {# Panels for the tidbits #}
@@ -86,13 +86,54 @@
         <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel Title</h3>
+              <h3 class="panel-title">Income and Spending</h3>
             </div>
 
             <div class="panel-body">
-              <p>
-                Mmm. Charts
-              </p>
+              <canvas id="incomeChart"></canvas>
+              <a role="button" data-toggle="collapse" href="#income-table">Expand / Collapse</a>
+              <table class="table table-hover collapse" id="income-table">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Total Income</th>
+                    <th>Total Spending</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>2010</td>
+                    <td>£2,870,629</td>
+                    <td>£2,897,856</td>
+                  </tr>
+
+                  <tr>
+                    <td>2011</td>
+                    <td>£3,019,406</td>
+                    <td>£3,110,235</td>
+                  </tr>
+
+                  <tr>
+                    <td>2012</td>
+                    <td>£2,713,501</td>
+                    <td>£2,818,921</td>
+                  </tr>
+
+                  <tr>
+                    <td>2013</td>
+                    <td>£2,814,877</td>
+                    <td>£3,012,553</td>
+                  </tr>
+
+                  <tr>
+                    <td>2014</td>
+                    <td>£2,845,831</td>
+                    <td>£3,534,372</td>
+                  </tr>
+                </tbody>
+
+              </table>
             </div>
 
           </div>
@@ -104,4 +145,36 @@
   </div>
 
 </div> <!-- End container -->
+
+<script type="text/javascript" src="{{asset('/js/chart-js/Chart.js')}}"></script>
+
+<script>
+
+  var ctx = document.getElementById("incomeChart").getContext("2d");
+
+  var data = {
+    labels: ["2010", "2011", "2012", "2013", "2014"],
+    datasets: [
+        {
+            label: "Income",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [2870629, 3019406, 2713501, 2814877, 2845831]
+        },
+        {
+            label: "Spending",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [2897856, 3110235, 2818921, 3012552, 3534372]
+        }
+    ]
+};
+
+  var incomeChart = new Chart(ctx).Bar(data);
+</script>
+
 {% endblock content %}
